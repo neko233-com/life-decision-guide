@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile, readdir, access } from 'node:fs/promises';
-import { join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { load } from 'cheerio';
 import { categories, categoryAliases } from '../src/data.js';
 import { createSearchIndex, searchIndex } from '../src/search.js';
@@ -67,7 +67,12 @@ for (const file of (await readdir('content')).filter(file => file.endsWith('.htm
 assert.equal(originalCount, tips.length, 'All source suggestions must be retained');
 
 const index = createSearchIndex(searchData.articles, searchData.categories, searchData.tips);
-assert.equal(index.length, 3 + categories.length + articles.length + tips.length);
+assert.equal(index.length, 3 + categories.length + articles.length + tips.length + articles.reduce((count, article) => count + (article.extraSections?.length || 0), 0));
+for (const article of articles) {
+  for (const section of article.extraSections || []) {
+    assert.ok(searchIndex(index, section.text).some(result => result.href === `/guide/${article.slug}#${section.anchor}`), `Supplement not searchable: ${article.slug}#${section.anchor}`);
+  }
+}
 for (const tip of tips) {
   for (const title of new Set([tip.title, tip.originalTitle])) {
     assert.ok(searchIndex(index, title).some(result => result.id === tip.id && result.href === tip.href), `Not searchable: ${tip.href}`);
@@ -75,6 +80,7 @@ for (const tip of tips) {
 }
 assert.equal(searchIndex(index, '打分')[0].href, '/workbench');
 assert.equal(searchIndex(index, '本节条目按主题分成下面几块').find(result => result.kind === 'chapter')?.href, '/guide/reference-book-01#reading-info');
+assert.equal(searchIndex(index, '转载、改编要写明出处并附原文链接').find(result => result.kind === 'supplement')?.href, '/guide/reference-book-26#section-2');
 
 const routes = ['/', '/guides', '/workbench', ...categories.map(category => `/guides/${category.id}`), ...articles.map(article => `/guide/${article.slug}`), '/404'];
 const pages = new Map();
@@ -83,6 +89,11 @@ for (const route of routes) {
   const page = load(html);
   assert.equal(page('#root').attr('data-page-path'), route, `Wrong prerender ${route}`);
   assert.ok(page('h1').text(), `Blank page ${route}`);
+  assert.ok(page('title').text().endsWith('· 人生决策指南'), `Missing page title ${route}`);
+  assert.equal(page('link[rel="canonical"]').attr('href'), `https://life.neko233.com${route}`, `Wrong canonical ${route}`);
+  assert.ok(page('meta[name="description"]').attr('content'), `Missing description ${route}`);
+  assert.equal(page('meta[property="og:title"]').attr('content'), page('title').text(), `Wrong share title ${route}`);
+  assert.equal(page('meta[name="theme-color"]').attr('content'), '#ffffff', `Wrong site theme ${route}`);
   const ids = page('[id]').toArray().map(element => page(element).attr('id'));
   assert.equal(ids.length, new Set(ids).size, `Duplicate anchor ${route}`);
   pages.set(route, page);
@@ -106,4 +117,28 @@ for (const [route, page] of pages) {
 }
 const redirects = await readFile('dist/_redirects', 'utf8');
 for (const [oldId, newId] of Object.entries(categoryAliases)) assert.ok(redirects.includes(`/guides/${oldId} /guides/${newId} 301`));
-console.log(`Verified ${articles.length} guides, ${tips.length} suggestions, ${fieldCount} original fields, ${index.length} search entries, ${routes.length} pages and ${linkCount} internal links.`);
+let documentLinkCount = 0;
+try {
+  const files = ['AGENTS.md', 'README.md', ...(await readdir('docs')).filter(file => file.endsWith('.md')).map(file => join('docs', file))];
+  for (const file of files) {
+    const markdown = await readFile(file, 'utf8');
+    for (const match of markdown.matchAll(/\[[^\]]*\]\(([^\s)]+)\)/g)) {
+      const href = match[1];
+      if (/^[a-z]+:/i.test(href)) continue;
+      const [path, fragment] = href.split('#');
+      const target = path ? resolve(dirname(file), decodeURIComponent(path)) : resolve(file);
+      await access(target);
+      if (fragment && target.endsWith('.md')) {
+        const content = await readFile(target, 'utf8');
+        const headings = Array.from(content.matchAll(/^#{1,6}\s+(.+)$/gm), item => item[1].trim().toLowerCase().replace(/[^\p{L}\p{N}\s_-]/gu, '').replace(/\s/g, '-'));
+        assert.ok(headings.includes(decodeURIComponent(fragment).toLowerCase()), `Broken documentation anchor ${file} -> ${href}`);
+      }
+      documentLinkCount++;
+    }
+  }
+} catch (error) {
+  if (error.code !== 'ENOENT') throw error;
+  // During the first layout phase, maintenance documents have not been added yet.
+  if (error.path !== 'docs') throw error;
+}
+console.log(`Verified ${articles.length} guides, ${tips.length} suggestions, ${fieldCount} original fields, ${index.length} search entries, ${routes.length} pages, ${linkCount} internal links and ${documentLinkCount} documentation links.`);

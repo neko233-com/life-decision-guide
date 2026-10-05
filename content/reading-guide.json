@@ -1,46 +1,227 @@
 {
-  "reference-book-01": {"title":"日常安全与预防","excerpt":"防意外，了解疫苗和筛查。"},
-  "reference-book-02": {"title":"健康习惯","excerpt":"从饮食、运动和睡眠开始。"},
-  "reference-book-03": {"title":"照顾精力","excerpt":"少一点消耗，多一点休息。"},
-  "reference-book-04": {"title":"把时间用好","excerpt":"安排日程，减少拖延。"},
-  "reference-book-05": {"title":"花钱更有数","excerpt":"消费、借贷、保险与投资。"},
-  "reference-book-06": {"title":"避开常见误区","excerpt":"查证生活与消费中的说法。"},
-  "reference-book-07": {"title":"收入中断怎么办","excerpt":"先找救助，再安排求职。"},
-  "reference-book-08": {"title":"守住财产与权益","excerpt":"借钱、签字和纠纷，先看风险。"},
-  "reference-book-09": {"title":"日常法律红线","excerpt":"了解哪些事容易带来法律责任。"},
-  "reference-book-10": {"title":"恋爱与婚姻","excerpt":"一起看关系、照护与生活成本。"},
-  "reference-book-11": {"title":"技术工作的法律风险","excerpt":"开发、接单、数据与开源。"},
-  "reference-book-12": {"title":"创业前先看风险","excerpt":"开店、合同与经营成本。"},
-  "reference-book-13": {"title":"急事先做什么","excerpt":"按现场情况查找急救步骤。"},
-  "reference-book-14": {"title":"保护账号与信息","excerpt":"密码、设备与个人资料。"},
-  "reference-book-15": {"title":"租房与买房","excerpt":"看合同，也看交易风险。"},
-  "reference-book-16": {"title":"管理慢性病","excerpt":"治疗、复查与日常安排。"},
-  "reference-book-17": {"title":"照顾家中老人","excerpt":"照护、监护与财产安排。"},
-  "reference-book-18": {"title":"育儿投入与支持","excerpt":"时间、费用与可用的支持。"},
-  "reference-book-19": {"title":"工资、离职与工伤","excerpt":"核对待遇，留好劳动记录。"},
-  "reference-book-20": {"title":"照顾新生儿","excerpt":"喂养、睡眠与常见风险。"},
-  "reference-book-21": {"title":"出行与境外安全","excerpt":"出境前准备，路上注意安全。"},
-  "reference-book-22": {"title":"放松与减压","excerpt":"选择适合自己的休闲方式。"},
-  "reference-book-23": {"title":"选技能与培训","excerpt":"先看用途，再算学习投入。"},
-  "reference-book-24": {"title":"看病少走弯路","excerpt":"就医、报销与病历管理。"},
-  "reference-book-25": {"title":"亲人离世后的手续","excerpt":"按顺序处理证件、费用和权益。"},
-  "reference-book-26": {"title":"网站与平台合规","excerpt":"业务、备案与数据责任。"},
-  "reference-book-27": {"title":"怀孕到生产","excerpt":"检查、住院与出院手续。"},
-  "reference-book-28": {"title":"减重与外形风险","excerpt":"改善外形，也要保护身体。"},
-  "reference-book-29": {"title":"面对重大变故","excerpt":"先稳定日常，再决定下一步。"},
-  "reference-book-30": {"title":"陪孩子上学","excerpt":"健康、学校与家庭安排。"},
-  "reference-book-31": {"title":"成年后的选择","excerpt":"比较教育、就业与其他路径。"},
-  "reference-book-32": {"title":"出国留学","excerpt":"身份、打工、保险与学历认证。"},
-  "reference-book-33": {"title":"残疾后的生活支持","excerpt":"照护、教育与权益。"},
-  "reference-book-34": {"title":"家庭用药安全","excerpt":"了解常备药的用法和风险。"},
-  "reference-doc-bystander": {"title":"遇到别人出事","excerpt":"先看现场，再决定如何帮助。","brief":["先确保自己安全，再联系急救或警方。","结合现场情况，判断能提供什么帮助。","需要救治时，按专业人员指引行动。"]},
-  "reference-doc-chronic-care": {"title":"刚确诊慢性病","excerpt":"从确诊到稳定，分阶段安排。","brief":["整理诊断、药物和检查记录。","和医生确认治疗、复查与费用安排。","按病情和复查结果调整生活。"]},
-  "reference-doc-citation-map": {"title":"原文引用索引","excerpt":"查看条目之间的关联。","brief":["找到想看的章节。","对照相关条目和原始出处。"]},
-  "reference-doc-emergency-kit": {"title":"家庭应急清单","excerpt":"买什么、放哪里、何时检查。","brief":["先清点现有装备，再补缺少的。","消防、急救和照明放在方便取用处。","记下检查时间和耗材有效期。"]},
-  "reference-doc-layoff": {"title":"被裁后先做什么","excerpt":"先处理文件，再核对待遇。","brief":["先读清离职原因和协议内容。","保存自己的合同、工资和考勤记录。","核对补偿、社保与办理期限。"]},
-  "reference-doc-marriage": {"title":"结婚前想清楚","excerpt":"把生活中的几笔账分开看。","brief":["分别看时间、金钱、照护与法律关系。","写下自己和伴侣的真实情况。","比较结婚与保持现状的成本。"]},
-  "reference-doc-newborn-paperwork": {"title":"孩子出生前后办什么","excerpt":"按时间顺序准备材料。","brief":["分产前、住院、出院和出生后四个阶段。","证件、医保和生育待遇分别核对。","向当地办理机构确认材料与期限。"]},
-  "reference-doc-platform": {"title":"做平台需要哪些手续","excerpt":"先分业务类型，再查资质。","brief":["明确业务，核对对应资质。","备案、内容审核与数据保护分别检查。","比较服务器成本，再确定配置。"]},
-  "reference-doc-reading": {"title":"怎么读这份指南","excerpt":"先看要点，需要时再查依据。","brief":["选一个与你有关的问题。","读一句要点，再展开完整内容。","结合自己的情况判断，不只看分数或结论。"]},
-  "reference-doc-sleep-shifts": {"title":"夜班与生物钟","excerpt":"了解夜班如何影响身体节律。","brief":["夜班会让作息与身体节律错开。","睡眠、光照和进食时间一起看。","调整前，先看证据与适用条件。"]}
+  "reference-book-01": {
+    "title": "日常安全与预防",
+    "excerpt": "防意外，了解疫苗和筛查。"
+  },
+  "reference-book-02": {
+    "title": "健康习惯",
+    "excerpt": "从饮食、运动和睡眠开始。"
+  },
+  "reference-book-03": {
+    "title": "照顾精力",
+    "excerpt": "少一点消耗，多一点休息。"
+  },
+  "reference-book-04": {
+    "title": "把时间用好",
+    "excerpt": "安排日程，减少拖延。"
+  },
+  "reference-book-05": {
+    "title": "花钱更有数",
+    "excerpt": "消费、借贷、保险与投资。"
+  },
+  "reference-book-06": {
+    "title": "避开常见误区",
+    "excerpt": "查证生活与消费中的说法。"
+  },
+  "reference-book-07": {
+    "title": "收入中断怎么办",
+    "excerpt": "先找救助，再安排求职。"
+  },
+  "reference-book-08": {
+    "title": "守住财产与权益",
+    "excerpt": "借钱、签字和纠纷，先看风险。"
+  },
+  "reference-book-09": {
+    "title": "日常法律红线",
+    "excerpt": "了解哪些事容易带来法律责任。"
+  },
+  "reference-book-10": {
+    "title": "恋爱与婚姻",
+    "excerpt": "一起看关系、照护与生活成本。"
+  },
+  "reference-book-11": {
+    "title": "技术工作的法律风险",
+    "excerpt": "开发、接单、数据与开源。"
+  },
+  "reference-book-12": {
+    "title": "创业前先看风险",
+    "excerpt": "开店、合同与经营成本。"
+  },
+  "reference-book-13": {
+    "title": "急事先做什么",
+    "excerpt": "按现场情况查找急救步骤。"
+  },
+  "reference-book-14": {
+    "title": "保护账号与信息",
+    "excerpt": "密码、设备与个人资料。"
+  },
+  "reference-book-15": {
+    "title": "租房与买房",
+    "excerpt": "看合同，也看交易风险。"
+  },
+  "reference-book-16": {
+    "title": "管理慢性病",
+    "excerpt": "治疗、复查与日常安排。"
+  },
+  "reference-book-17": {
+    "title": "照顾家中老人",
+    "excerpt": "照护、监护与财产安排。"
+  },
+  "reference-book-18": {
+    "title": "育儿投入与支持",
+    "excerpt": "时间、费用与可用的支持。"
+  },
+  "reference-book-19": {
+    "title": "工资、离职与工伤",
+    "excerpt": "核对待遇，留好劳动记录。"
+  },
+  "reference-book-20": {
+    "title": "照顾新生儿",
+    "excerpt": "喂养、睡眠与常见风险。"
+  },
+  "reference-book-21": {
+    "title": "出行与境外安全",
+    "excerpt": "出境前准备，路上注意安全。"
+  },
+  "reference-book-22": {
+    "title": "放松与减压",
+    "excerpt": "选择适合自己的休闲方式。"
+  },
+  "reference-book-23": {
+    "title": "选技能与培训",
+    "excerpt": "先看用途，再算学习投入。"
+  },
+  "reference-book-24": {
+    "title": "看病少走弯路",
+    "excerpt": "就医、报销与病历管理。"
+  },
+  "reference-book-25": {
+    "title": "亲人离世后的手续",
+    "excerpt": "按顺序处理证件、费用和权益。"
+  },
+  "reference-book-26": {
+    "title": "网站与平台合规",
+    "excerpt": "业务、备案与数据责任。"
+  },
+  "reference-book-27": {
+    "title": "怀孕到生产",
+    "excerpt": "检查、住院与出院手续。"
+  },
+  "reference-book-28": {
+    "title": "减重与外形风险",
+    "excerpt": "改善外形，也要保护身体。"
+  },
+  "reference-book-29": {
+    "title": "面对重大变故",
+    "excerpt": "先稳定日常，再决定下一步。"
+  },
+  "reference-book-30": {
+    "title": "陪孩子上学",
+    "excerpt": "健康、学校与家庭安排。"
+  },
+  "reference-book-31": {
+    "title": "成年后的选择",
+    "excerpt": "比较教育、就业与其他路径。"
+  },
+  "reference-book-32": {
+    "title": "出国留学",
+    "excerpt": "身份、打工、保险与学历认证。"
+  },
+  "reference-book-33": {
+    "title": "残疾后的生活支持",
+    "excerpt": "照护、教育与权益。"
+  },
+  "reference-book-34": {
+    "title": "家庭用药安全",
+    "excerpt": "了解常备药的用法和风险。"
+  },
+  "reference-doc-bystander": {
+    "title": "遇到别人出事",
+    "excerpt": "先看现场，再决定如何帮助。",
+    "brief": [
+      "先确认自己是路人、场所管理者，还是事故相关人。",
+      "决定帮助时，先确保自身安全，打 120，别盲目搬扶。",
+      "观察伤者呼吸，按急救人员指引决定下一步。"
+    ]
+  },
+  "reference-doc-chronic-care": {
+    "title": "刚确诊慢性病",
+    "excerpt": "从确诊到稳定，分阶段安排。",
+    "brief": [
+      "整理诊断、药物和检查记录。",
+      "和医生确认治疗、复查与费用安排。",
+      "按病情和复查结果调整生活。"
+    ]
+  },
+  "reference-doc-citation-map": {
+    "title": "条目交叉引用",
+    "excerpt": "查看正文引用指向哪条建议。",
+    "brief": [
+      "按章节或长文找到引用。",
+      "对照引用条号、目标标题和上下文。"
+    ]
+  },
+  "reference-doc-emergency-kit": {
+    "title": "家庭应急清单",
+    "excerpt": "买什么、放哪里、何时检查。",
+    "brief": [
+      "先清点现有装备，再补缺少的。",
+      "消防、急救和照明放在方便取用处。",
+      "记下检查时间和耗材有效期。"
+    ]
+  },
+  "reference-doc-layoff": {
+    "title": "被裁后先做什么",
+    "excerpt": "先处理文件，再核对待遇。",
+    "brief": [
+      "被辞退时，别签“个人原因主动辞职”；谈妥的补偿写进协议。",
+      "保存自己的合同、工资和考勤记录。",
+      "核对补偿、社保与办理期限。"
+    ]
+  },
+  "reference-doc-marriage": {
+    "title": "结婚前想清楚",
+    "excerpt": "把生活中的几笔账分开看。",
+    "brief": [
+      "分别看时间、金钱、照护与法律关系。",
+      "写下自己和伴侣的真实情况。",
+      "比较结婚与保持现状的成本。"
+    ]
+  },
+  "reference-doc-newborn-paperwork": {
+    "title": "孩子出生前后办什么",
+    "excerpt": "按时间顺序准备材料。",
+    "brief": [
+      "从备孕到孩子满一岁，按当前阶段查清单。",
+      "产检、疫苗、证件和医保分别核对。",
+      "向当地办理机构确认材料与期限。"
+    ]
+  },
+  "reference-doc-platform": {
+    "title": "做平台需要哪些手续",
+    "excerpt": "先分业务类型，再查资质。",
+    "brief": [
+      "明确业务，核对对应资质。",
+      "备案、内容审核与数据保护分别检查。",
+      "先看停机风险和运维能力，再比较服务器价格。"
+    ]
+  },
+  "reference-doc-reading": {
+    "title": "怎么读这份指南",
+    "excerpt": "先看要点，需要时再查依据。",
+    "brief": [
+      "选一个与你有关的问题。",
+      "读一句要点，再展开完整内容。",
+      "结合自己的情况判断，不只看分数或结论。"
+    ]
+  },
+  "reference-doc-sleep-shifts": {
+    "title": "夜班与生物钟",
+    "excerpt": "了解夜班如何影响身体节律。",
+    "brief": [
+      "夜班会让作息与身体节律错开。",
+      "睡眠、光照和进食时间一起看。",
+      "调整前，先看证据与适用条件。"
+    ]
+  }
 }
