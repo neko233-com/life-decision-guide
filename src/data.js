@@ -1,10 +1,16 @@
 export const categories = [
-  { id: 'career', name: '职业与成长', icon: 'BriefcaseBusiness', description: '找到适合自己的方向，走出有意义的路径。' },
-  { id: 'learning', name: '学习与探索', icon: 'BookOpen', description: '保持好奇，在不确定中持续成长。' },
-  { id: 'relationships', name: '关系与边界', icon: 'UsersRound', description: '建立真诚的连接，也守住自己的边界。' },
-  { id: 'living', name: '城市与生活', icon: 'House', description: '在现实的约束中，过上更喜欢的生活。' },
-  { id: 'energy', name: '时间与精力', icon: 'Clock3', description: '把有限的资源，用在重要的事上。' },
-  { id: 'thinking', name: '决策基本功', icon: 'Compass', description: '掌握思考工具，做出更清醒的选择。' },
+  { id: 'health', name: '健康与看病', icon: 'HeartPulse', description: '防病、慢病、用药与就医。', primary: true },
+  { id: 'safety', name: '安全与急救', icon: 'ShieldCheck', description: '意外、急救、账号与出行。', primary: true },
+  { id: 'money', name: '钱与生活', icon: 'Wallet', description: '省钱、住房、创业与平台。', primary: true },
+  { id: 'rights', name: '法律与工作', icon: 'Scale', description: '法律红线、劳动与权益。', primary: true },
+  { id: 'family', name: '家庭与关系', icon: 'UsersRound', description: '婚恋、育儿、养老与身后事。', primary: true },
+  { id: 'growth', name: '成长与选择', icon: 'Compass', description: '时间、技能、升学与人生方向。', primary: true },
+  { id: 'career', name: '职业选择', icon: 'BriefcaseBusiness', description: '选方向，判断要不要换工作。' },
+  { id: 'learning', name: '学习成长', icon: 'BookOpen', description: '学技能，找到兴趣。' },
+  { id: 'relationships', name: '关系边界', icon: 'UsersRound', description: '说清需求，守住边界。' },
+  { id: 'living', name: '城市生活', icon: 'House', description: '选城市，安排日常。' },
+  { id: 'energy', name: '时间精力', icon: 'Clock3', description: '排优先级，保护专注。' },
+  { id: 'thinking', name: '思考方法', icon: 'Compass', description: '问对问题，先试再决定。' },
 ];
 export const steps = [
   { title: '明确问题', icon: 'FileText', text: '厘清你真正想解决的是什么。' },

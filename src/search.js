@@ -1,0 +1,99 @@
+const publicPages = [
+  { href: '/', title: '指南首页', text: '人生决策指南。想清楚，再决定。一个问题，三个步骤。', icon: 'Compass' },
+  { href: '/guides', title: '阅读指南', text: '按主题浏览全部指南，筛选文章，查看收藏。', icon: 'BookOpen' },
+  { href: '/workbench', title: '方案对比', text: '决策工作台。写清问题、目标和底线。比较方案，设置标准和权重，给选项打分与评分。先试一步，回看结果，导出 Markdown 记录。', icon: 'FileText' },
+];
+
+const normalize = value => String(value || '').toLowerCase();
+
+export function queryTerms(query) {
+  return [...new Set(normalize(query).trim().split(/\s+/).filter(Boolean))];
+}
+
+export function createSearchIndex(articles, categories, tips = []) {
+  const categoryNames = Object.fromEntries(categories.map(category => [category.id, category.name]));
+  return [
+    ...publicPages.map(page => ({ ...page, kind: 'page', label: '页面' })),
+    ...categories.map(category => ({ href: `/guides/${category.id}`, title: category.name, text: category.description, kind: 'topic', label: '主题', icon: category.icon })),
+    ...articles.map(article => {
+      const chapter = article.kind === 'reference' && article.tipCount > 0;
+      const text = article.text ?? [article.summaryText, article.detailText].filter(Boolean).join(' ');
+      return { href: `/guide/${article.slug}`, title: article.title, text: chapter ? article.summaryText ?? article.excerpt ?? '' : text, summaryText: article.summaryText, detailText: chapter ? '' : article.detailText, excerpt: article.excerpt, category: categoryNames[article.category] || '', kind: chapter ? 'chapter' : 'article', label: chapter ? '章节' : '指南', icon: 'BookOpen' };
+    }),
+    ...tips.map(tip => ({ id: tip.id, href: tip.href, title: tip.title || tip.plain, plain: tip.plain, text: tip.text || [['说人话', tip.plain], ['成本', tip.cost], ['收益', tip.benefit], ['证据等级', tip.evidence], ['来源', tip.sources], ['备注', tip.notes]].filter(([, value]) => value).map(([label, value]) => `${label}：${value}`).join(' '), cost: tip.cost, benefit: tip.benefit, evidence: tip.evidence, sources: tip.sources, notes: tip.notes, chapterSlug: tip.chapterSlug, chapterTitle: tip.chapterTitle, category: categoryNames[tip.category] || tip.category || '', kind: 'tip', label: '建议', icon: 'List' })),
+  ].map((entry, order) => {
+    const normalizedTitle = normalize(entry.title);
+    const normalizedText = normalize(entry.text);
+    const normalizedCategory = normalize(entry.category);
+    const normalizedChapter = normalize(entry.chapterTitle);
+    const normalizedFields = normalize([entry.plain, entry.cost, entry.benefit, entry.evidence, entry.sources, entry.notes].filter(Boolean).join(' '));
+    return { ...entry, id: entry.id || entry.href, baseHref: entry.href, order, normalizedTitle, normalizedText, normalizedSummary: normalize(entry.summaryText ?? entry.text), normalizedDetail: normalize(entry.detailText), normalizedCategory, normalizedChapter, normalizedPlain: normalize(entry.plain), searchable: `${normalizedTitle} ${normalizedCategory} ${normalizedChapter} ${normalizedText} ${normalizedFields}` };
+  });
+}
+
+export function searchIndex(index, query) {
+  const terms = queryTerms(query);
+  if (!terms.length) {
+    const chapters = index.filter(entry => entry.kind === 'chapter');
+    return [...index.filter(entry => entry.kind === 'page'), ...(chapters.length ? chapters : index.filter(entry => entry.kind === 'article')).slice(0, 4)];
+  }
+  const phrase = normalize(query).trim();
+  return index.flatMap(entry => {
+    if (!terms.every(term => entry.searchable.includes(term))) return [];
+    let score = (entry.kind === 'page' ? 10 : entry.kind === 'tip' ? 6 : 0) + (entry.normalizedTitle === phrase ? 100 : entry.normalizedTitle.includes(phrase) ? 35 : 0);
+    for (const term of terms) {
+      if (entry.normalizedTitle.includes(term)) score += 20;
+      if (entry.normalizedCategory.includes(term)) score += 7;
+      if (entry.normalizedChapter.includes(term)) score += 3;
+      if (entry.normalizedText.includes(term)) score += 2;
+    }
+    const summary = `${entry.normalizedTitle} ${entry.normalizedCategory} ${entry.normalizedSummary}`;
+    const hasSummary = entry.kind === 'article' && typeof entry.summaryText === 'string';
+    const detailMatch = hasSummary && terms.some(term => !summary.includes(term) && entry.normalizedDetail.includes(term));
+    return [{ ...entry, score, href: detailMatch ? `${entry.baseHref}#full-guide` : entry.baseHref, matchType: detailMatch ? 'detail' : 'summary', matchLabel: hasSummary ? detailMatch ? '完整说明' : '简版' : undefined }];
+  }).sort((a, b) => b.score - a.score || a.order - b.order);
+}
+
+export function resultSnippet(entry, terms, maxLength = 65) {
+  let snippetTerms = terms;
+  let source = entry.matchType === 'detail' ? entry.detailText : entry.summaryText ?? entry.text;
+  if (entry.kind === 'tip') {
+    const extraTerms = terms.filter(term => !entry.normalizedPlain.includes(term) && entry.normalizedText.includes(term));
+    source = extraTerms.length ? entry.text : entry.plain || entry.text;
+    if (extraTerms.length) snippetTerms = extraTerms;
+  }
+  const text = String(source || entry.text || entry.excerpt || '').replace(/\s+/g, ' ').trim();
+  const normalized = normalize(text);
+  const positions = snippetTerms.map(term => normalized.indexOf(term)).filter(position => position >= 0);
+  const match = positions.length ? Math.min(...positions) : 0;
+  const longestTerm = Math.max(0, ...terms.map(term => term.length));
+  const length = Math.max(maxLength, longestTerm + 20);
+  let start = Math.max(0, match - 22);
+  // Start near a sentence boundary when it still keeps the matching word in view.
+  const boundary = Math.max(text.lastIndexOf('。', match), text.lastIndexOf('！', match), text.lastIndexOf('？', match));
+  if (boundary >= start && boundary < match) start = boundary + 1;
+  start = Math.min(start, Math.max(0, text.length - length));
+  const end = Math.min(text.length, start + length);
+  return `${start ? '…' : ''}${text.slice(start, end).trim()}${end < text.length ? '…' : ''}`;
+}
+
+export function highlightSegments(value, terms) {
+  const text = String(value || '');
+  const normalized = normalize(text);
+  const parts = [];
+  let cursor = 0;
+  while (cursor < text.length) {
+    let next = -1;
+    let matched = '';
+    for (const term of terms) {
+      if (!term) continue;
+      const position = normalized.indexOf(term, cursor);
+      if (position >= 0 && (next < 0 || position < next || position === next && term.length > matched.length)) { next = position; matched = term; }
+    }
+    if (next < 0) { parts.push({ text: text.slice(cursor), match: false }); break; }
+    if (next > cursor) parts.push({ text: text.slice(cursor, next), match: false });
+    parts.push({ text: text.slice(next, next + matched.length), match: true });
+    cursor = next + matched.length;
+  }
+  return parts;
+}
