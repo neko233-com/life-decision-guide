@@ -28,6 +28,8 @@
 
 `scoring.js` 计算加权平均，`Workbench.jsx` 显示评分尺度、权重占比、各项贡献和结果条。100 分制等于 5 分制乘 20；权重 0 不参与，评分 0 表示未填写。每个方案填完有效标准后显示自己的分数，全部完成后列出最高分及并列方案。仍读取 `life-guide-decision-v1` 浏览器记录；决策记录可导出为 Markdown。
 
+`storage.js` 读写前核对原值。评分修改后立即保存；损坏记录、读写失败或另一页面更新时暂停自动写入，保留原值和当前填写。读者可下载原记录、导出当前填写、重新载入，或确认覆盖后继续保存。搜索分类统计包括分组与补充资料。
+
 ## URL 与分类
 
 六个分类在 `src/data.js` 定义。旧分类 `career`、`learning`、`relationships`、`living`、`energy`、`thinking` 映射到现有分类；`public/_redirects` 为旧分类 URL 保留 301 跳转。
