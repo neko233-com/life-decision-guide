@@ -1,0 +1,6 @@
+import { ArrowRight, ArrowUpRight, BookOpen, Bookmark, BriefcaseBusiness, Check, ChevronLeft, ChevronRight, Clock3, Compass, Download, FileText, FlaskConical, Github, House, List, Menu, Plus, RefreshCw, Search, Trash2, UsersRound, X } from 'lucide-react';
+const icons = { ArrowRight, ArrowUpRight, BookOpen, Bookmark, BriefcaseBusiness, Check, ChevronLeft, ChevronRight, Clock3, Compass, Download, FileText, FlaskConical, Github, House, List, Menu, Plus, RefreshCw, Search, Trash2, UsersRound, X };
+export default function Icon({ name, size = 20, ...props }) {
+  const Component = icons[name] || Compass;
+  return <Component size={size} strokeWidth={1.6} aria-hidden="true" {...props} />;
+}
