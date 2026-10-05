@@ -45,7 +45,7 @@ npm run preview
 
 ## 部署
 
-Cloudflare Pages 项目名：`life-decision-guide`。生产分支：`main`。构建命令：`npm run build`。输出目录：`dist`。自定义域名：`life.neko233.com`。
+Cloudflare Pages 项目名：`life-decision-guide`，已连接同名 GitHub 仓库，推送 `main` 后自动部署。生产分支：`main`。构建命令：`npm run build`。输出目录：`dist`。自定义域名：`life.neko233.com`。
 
 已登录 Wrangler 时可以直接发布：
 
