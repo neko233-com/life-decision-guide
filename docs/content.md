@@ -1,0 +1,39 @@
+# 内容维护
+
+内容共 56 篇：44 篇参考内容（34 章、658 条建议、9 篇补充文档、1 篇阅读帮助）和 12 篇原创决策指南。精简阅读层，完整原文继续保留。
+
+## 编辑入口
+
+| 改什么 | 编辑哪里 |
+| --- | --- |
+| 原创指南正文 | `content/` 中对应的原创 HTML |
+| 参考页面短标题、简介、文档要点 | `content/reading-guide.json` |
+| 第 1–12 章建议短版 | `content/short-tips-01-12.json` |
+| 第 13–34 章建议短版 | `content/short-tips-13-34.json` |
+| 重新同步参考原文 | `scripts/import-reference.mjs` 与固定版本上游快照 |
+
+短版键使用 `{slug}#{tip-id}`，例如 `reference-book-01#tip-1-1`，值包含 `title` 和 `summary`。改短版时不直接删改参考 HTML。
+
+标题建议不超过 24 字，一句话不超过 60 字；为保留必要条件，可使用构建允许的 28 字和 75 字上限。先写动作，再写适用条件，具体约定见 [设计](design.md)。
+
+## 原文与来源
+
+参考作品是 eternity4719 的 [《高性价比人生指南》](https://github.com/eternity4719/HowToLiveBetter)。同步版本为 `bc149af3a02e721f0e3d03a673a0ec64fca765c4`，日期为 2026-10-05。
+
+参考正文遵循 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)。许可在 [reference/LICENSE-CC-BY-4.0.txt](../reference/LICENSE-CC-BY-4.0.txt)，来源清单在 [reference/manifest.json](../reference/manifest.json)。署名须保留作品、作者、原文链接、许可与本站改动说明。
+
+每条完整保留成本、说人话、收益、证据等级、来源和备注；核实记录保留在上游仓库；本站保留导入正文已有的来源链接。本站把原文转为 HTML，新增短版、折叠阅读和本地导航。原文完整性验证不代表全部医学、法律或金融观点已重新核实。
+
+## 同步与验证
+
+准备符合导入器固定版本要求的本地上游快照，再运行：
+
+```sh
+npm run import:reference -- --source=/path/to/HowToLiveBetter
+npm run build
+npm run verify
+```
+
+导入器检查版本和完整性，生成参考 HTML、来源清单与许可副本。重新导入后检查条目 ID、六字段和链接；新版本增加或移除条目时，需同时维护阅读映射与验证预期。
+
+浏览器抽查短版和原文的对应关系，特别检查医疗禁忌、剂量、法律适用条件、期限及风险。搜索原始标题或来源词，确认可以定位完整内容。
