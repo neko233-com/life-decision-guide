@@ -23,14 +23,14 @@ export function createSearchIndex(articles, categories, tips = []) {
     }),
     ...articles.flatMap(article => (article.extraSections || []).map(section => ({ href: `/guide/${article.slug}#${section.anchor}`, title: `${article.title} · ${section.title}`, text: section.text, chapterTitle: article.title, category: categoryNames[article.category] || '', kind: 'supplement', label: '补充', icon: 'BookOpen' }))),
     ...articles.flatMap(article => (article.groups || []).map(group => ({ href: `/guide/${article.slug}#${group.anchor}`, title: `${article.title} · ${group.title}`, text: group.description || group.title, chapterTitle: article.title, category: categoryNames[article.category] || '', kind: 'group', label: '分组', icon: 'List' }))),
-    ...tips.map(tip => ({ id: tip.id, href: tip.href, title: tip.title || tip.plain, originalTitle: tip.originalTitle, summaryText: tip.summary, plain: tip.plain, text: tip.text || [tip.originalTitle, tip.summary, ...[['说人话', tip.plain], ['成本', tip.cost], ['收益', tip.benefit], ['证据等级', tip.evidence], ['来源', tip.sources], ['备注', tip.notes]].filter(([, value]) => value).map(([label, value]) => `${label}：${value}`)].filter(Boolean).join(' '), cost: tip.cost, benefit: tip.benefit, evidence: tip.evidence, sources: tip.sources, notes: tip.notes, chapterSlug: tip.chapterSlug, chapterTitle: tip.chapterTitle, category: categoryNames[tip.category] || tip.category || '', kind: 'tip', label: '建议', icon: 'List' })),
+    ...tips.map(tip => ({ id: tip.id, href: tip.href, title: tip.title || tip.plain, originalTitle: tip.originalTitle, summaryText: tip.summary, updateText: tip.updateText, updateAnchor: tip.updateAnchor, plain: tip.plain, text: tip.text || [tip.originalTitle, tip.summary, tip.updateText, ...[['说人话', tip.plain], ['成本', tip.cost], ['收益', tip.benefit], ['证据等级', tip.evidence], ['来源', tip.sources], ['备注', tip.notes]].filter(([, value]) => value).map(([label, value]) => `${label}：${value}`)].filter(Boolean).join(' '), cost: tip.cost, benefit: tip.benefit, evidence: tip.evidence, sources: tip.sources, notes: tip.notes, chapterSlug: tip.chapterSlug, chapterTitle: tip.chapterTitle, category: categoryNames[tip.category] || tip.category || '', kind: 'tip', label: '建议', icon: 'List' })),
   ].map((entry, order) => {
     const normalizedTitle = normalize(entry.title);
     const normalizedText = normalize(entry.text);
     const normalizedCategory = normalize(entry.category);
     const normalizedChapter = normalize(entry.chapterTitle);
     const normalizedFields = normalize([entry.plain, entry.cost, entry.benefit, entry.evidence, entry.sources, entry.notes].filter(Boolean).join(' '));
-    return { ...entry, id: entry.id || entry.href, baseHref: entry.href, order, normalizedTitle, normalizedText, normalizedSummary: normalize(entry.summaryText ?? entry.text), normalizedDetail: normalize(entry.detailText), normalizedCategory, normalizedChapter, normalizedPlain: normalize(entry.plain), searchable: `${normalizedTitle} ${normalize(entry.originalTitle)} ${normalizedCategory} ${normalizedChapter} ${normalizedText} ${normalizedFields}` };
+    return { ...entry, id: entry.id || entry.href, baseHref: entry.href, order, normalizedTitle, normalizedText, normalizedSummary: normalize(entry.summaryText ?? entry.text), normalizedDetail: normalize(entry.detailText), normalizedCategory, normalizedChapter, normalizedPlain: normalize(entry.plain), normalizedFields, normalizedUpdate: normalize(entry.updateText), searchable: `${normalizedTitle} ${normalize(entry.originalTitle)} ${normalizedCategory} ${normalizedChapter} ${normalizedText} ${normalizedFields}` };
   });
 }
 
@@ -53,14 +53,16 @@ export function searchIndex(index, query) {
     const summary = `${entry.normalizedTitle} ${entry.normalizedCategory} ${entry.normalizedSummary}`;
     const hasSummary = (entry.kind === 'article' || entry.kind === 'chapter') && typeof entry.summaryText === 'string';
     const detailMatch = hasSummary && terms.some(term => !summary.includes(term) && entry.normalizedDetail.includes(term));
-    return [{ ...entry, score, href: detailMatch ? `${entry.baseHref}#${entry.detailAnchor || 'full-guide'}` : entry.baseHref, matchType: detailMatch ? 'detail' : 'summary', matchLabel: hasSummary ? detailMatch ? '完整内容' : '要点' : undefined }];
+    const original = `${entry.normalizedTitle} ${normalize(entry.originalTitle)} ${entry.normalizedSummary} ${entry.normalizedCategory} ${entry.normalizedChapter} ${entry.normalizedFields}`;
+    const updateMatch = entry.kind === 'tip' && entry.updateAnchor && terms.some(term => !original.includes(term) && entry.normalizedUpdate.includes(term));
+    return [{ ...entry, score, href: updateMatch ? `${entry.baseHref.split('#')[0]}#${entry.updateAnchor}` : detailMatch ? `${entry.baseHref}#${entry.detailAnchor || 'full-guide'}` : entry.baseHref, matchType: updateMatch ? 'update' : detailMatch ? 'detail' : 'summary', matchLabel: updateMatch ? '本站核对' : hasSummary ? detailMatch ? '完整内容' : '要点' : undefined }];
   }).sort((a, b) => b.score - a.score || a.order - b.order);
 }
 
 export function resultSnippet(entry, terms, maxLength = 65) {
   let snippetTerms = terms;
-  let source = entry.matchType === 'detail' ? entry.detailText : entry.summaryText ?? entry.text;
-  if (entry.kind === 'tip') {
+  let source = entry.matchType === 'update' ? entry.updateText : entry.matchType === 'detail' ? entry.detailText : entry.summaryText ?? entry.text;
+  if (entry.kind === 'tip' && entry.matchType !== 'update') {
     const extraTerms = terms.filter(term => !entry.normalizedPlain.includes(term) && entry.normalizedText.includes(term));
     const summaryContext = `${entry.normalizedSummary} ${entry.normalizedTitle} ${entry.normalizedCategory} ${entry.normalizedChapter}`;
     const useSummary = entry.summaryText && terms.every(term => summaryContext.includes(term));

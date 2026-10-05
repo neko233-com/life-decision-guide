@@ -10,6 +10,9 @@ const noteKeys = readingMaps.flatMap(map => Object.keys(map));
 if (new Set(noteKeys).size !== noteKeys.length) throw new Error('Duplicate concise reading note');
 const shortTips = Object.assign({}, ...readingMaps);
 const usedNotes = new Set();
+const updateFiles = (await readdir('content/updates')).filter(file => file.endsWith('.html'));
+const readingUpdates = new Map(await Promise.all(updateFiles.map(async file => [file.slice(0, -5), await readFile(`content/updates/${file}`, 'utf8')])));
+const usedUpdates = new Set();
 
 const articles = [];
 const tips = [];
@@ -59,6 +62,9 @@ for (const file of (await readdir('content')).filter(file => file.endsWith('.htm
     const id = tip.attr('id');
     if (!id) throw new Error(`Missing tip id: ${file}`);
     const originalTipTitle = tip.find('.tip-title').text();
+    const updateKey = `${slug}-${id}`;
+    const updateHtml = readingUpdates.get(updateKey);
+    let updateText = '', updateAnchor = '';
     const noteKey = `${slug}#${id}`;
     const note = shortTips[noteKey];
     if (!note) throw new Error(`Missing concise reading note: ${noteKey}`);
@@ -72,7 +78,17 @@ for (const file of (await readdir('content')).filter(file => file.endsWith('.htm
       body.find('.tip-original-title').text(originalTipTitle);
       body.find('.tip-source').append(originalBody);
     }
-    tips.push({ id: `${slug}-${id}`, title: note?.title || originalTipTitle, originalTitle: originalTipTitle, summary: note?.summary || '', plain: fields['说人话'] || '', cost: fields['成本'] || '', benefit: fields['收益'] || '', evidence: fields['证据等级'] || '', sources: fields['来源'] || fields['原始出处'] || '', notes: fields['备注'] || '', text: body.text().replace(/\s+/g, ' ').trim(), href: `/guide/${slug}#${id}`, chapterSlug: slug, chapterTitle: title, category });
+    if (updateHtml) {
+      const update = $(updateHtml);
+      const element = update.filter('details.tip-update');
+      if (element.length !== 1 || !/^\d{4}-\d{2}-\d{2}$/.test(element.attr('data-updated')) || !element.find('.tip-update-body a[href^="https://"]').length) throw new Error(`Invalid reading update: ${updateKey}`);
+      updateAnchor = `${id}-update`;
+      element.attr('id', updateAnchor);
+      body.find('.tip-evidence').before(element);
+      updateText = element.text().replace(/\s+/g, ' ').trim();
+      usedUpdates.add(updateKey);
+    }
+    tips.push({ id: `${slug}-${id}`, title: note?.title || originalTipTitle, originalTitle: originalTipTitle, summary: note?.summary || '', plain: fields['说人话'] || '', cost: fields['成本'] || '', benefit: fields['收益'] || '', evidence: fields['证据等级'] || '', sources: fields['来源'] || fields['原始出处'] || '', notes: fields['备注'] || '', updateText, updateAnchor, text: body.text().replace(/\s+/g, ' ').trim(), href: `/guide/${slug}#${id}`, chapterSlug: slug, chapterTitle: title, category });
   });
   const grouping = readingGroups[slug];
   const groups = [];
@@ -122,6 +138,7 @@ for (const file of (await readdir('content')).filter(file => file.endsWith('.htm
   articles.push({ slug, title, originalTitle, category, kind: article.attr('data-kind') || 'original', tipCount, groups, source: article.attr('data-source-url') ? { url: article.attr('data-source-url'), path: article.attr('data-source-path') } : null, order: Number(article.attr('data-order')), excerpt: article.find('.lead').text(), html: article.html(), text, summaryText, detailText, extraSections, toc, minutes: Math.max(1, Math.ceil(summaryText.replace(/\s/g, '').length / 260)) });
 }
 for (const key of Object.keys(shortTips)) if (!usedNotes.has(key)) throw new Error(`Unknown concise reading note: ${key}`);
+for (const key of readingUpdates.keys()) if (!usedUpdates.has(key)) throw new Error(`Unknown reading update: ${key}`);
 articles.sort((a, b) => (a.kind === 'reference' ? 0 : 1) - (b.kind === 'reference' ? 0 : 1) || a.order - b.order);
 await mkdir('src/generated', { recursive: true });
 await writeFile('src/generated/content.json', JSON.stringify(articles));

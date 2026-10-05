@@ -498,6 +498,10 @@ main.home { width: 100%; max-width: none; margin: 0; }
 .tip-heading { display: block; min-width: 0; }
 .tip-preview { display: block; margin-top: 6px; font-size: 12px; line-height: 1.75; color: #6e6e73; font-weight: 400; }
 .reference-tip[open] .tip-preview { display: none; }
+.tip-update { margin: 14px 0; padding: 13px 16px; background: #f5f5f7; border-radius: 10px; }
+.tip-update > summary { cursor: pointer; color: #0066cc; font-size: 12px; line-height: 1.7; }
+.prose .tip-update-body p { font-size: 12px; line-height: 1.85; margin: 12px 0; }
+.prose .tip-update-source { color: #6e6e73; }
 .criteria-editor > div { grid-template-columns: minmax(0,1fr) 115px; }
 .weight-share { color: #0066cc; font-size: 11px; font-weight: 400; }
 .score-rubric { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 12px; margin-bottom: 18px; }

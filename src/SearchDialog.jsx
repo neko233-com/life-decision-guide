@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Icon from './Icons.jsx';
 import { createSearchIndex, highlightSegments, queryTerms, resultSnippet, searchIndex } from './search.js';
+import { revealHash } from './reading.js';
 
 const batchSize = 40;
 let indexPromise;
@@ -74,8 +75,18 @@ export default function SearchDialog({ open, onClose }) {
       setActive(current => (current + (event.key === 'ArrowDown' ? 1 : -1) + visibleResults.length) % visibleResults.length);
     } else if (event.key === 'Enter' && activeResult) {
       event.preventDefault();
-      window.location.assign(activeResult.href);
+      navigate(activeResult);
     }
+  }
+
+  function navigate(result) {
+    dialogRef.current.close();
+    onClose();
+    const next = new URL(result.href, window.location.href);
+    if (next.pathname === window.location.pathname && next.search === window.location.search) {
+      if (next.href !== window.location.href) window.history.pushState(null, '', next.href);
+      requestAnimationFrame(() => next.hash ? revealHash(next.hash) : window.scrollTo({ top: 0, behavior: 'instant' }));
+    } else window.location.assign(result.href);
   }
 
   function showMore() {
@@ -88,7 +99,7 @@ export default function SearchDialog({ open, onClose }) {
     <div className="gsearch-heading"><h2 id="gsearch-title">全站搜索</h2><button className="icon-button" aria-label="关闭搜索" onClick={onClose}><Icon name="X" size={20} /></button></div>
     <label className="gsearch-field"><Icon name="Search" size={21} /><input autoFocus type="search" name="site-search" autoComplete="off" value={query} onChange={event => { setQuery(event.target.value); setActive(0); setLimit(batchSize); }} onKeyDown={move} placeholder="搜索建议、问题或工具…" aria-label="全站搜索关键词" aria-controls="gsearch-results" aria-activedescendant={activeResult ? `gsearch-result-${active}` : undefined} role="combobox" aria-autocomplete="list" aria-expanded={open} /></label>
     <div className="gsearch-summary" aria-live="polite">{loadState === 'ready' ? terms.length ? <><span>{results.length} 个结果</span>{results.length > 0 && <span>{countSummary}</span>}</> : <><span>常用入口</span><span>推荐阅读</span></> : <span>{loadState === 'error' ? '搜索暂时不可用' : '加载搜索中…'}</span>}</div>
-    <ul className="gsearch-results" id="gsearch-results" role="listbox" aria-label="搜索结果" aria-busy={loadState === 'loading'}>{visibleResults.map((result, position) => <li key={result.id} role="presentation"><a id={`gsearch-result-${position}`} data-result-index={position} role="option" aria-selected={active === position} className={active === position ? 'gsearch-result is-active' : 'gsearch-result'} href={result.href} onMouseEnter={() => setActive(position)} onFocus={() => setActive(position)}>
+    <ul className="gsearch-results" id="gsearch-results" role="listbox" aria-label="搜索结果" aria-busy={loadState === 'loading'}>{visibleResults.map((result, position) => <li key={result.id} role="presentation"><a id={`gsearch-result-${position}`} data-result-index={position} role="option" aria-selected={active === position} className={active === position ? 'gsearch-result is-active' : 'gsearch-result'} href={result.href} onClick={event => { if (event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) { event.preventDefault(); navigate(result); } }} onMouseEnter={() => setActive(position)} onFocus={() => setActive(position)}>
       <Icon name={result.icon} size={19} /><div><div className="gsearch-result-heading"><strong><Highlight text={result.title.length > 60 ? `${result.title.slice(0, 60)}…` : result.title} terms={terms} /></strong><span>{result.matchLabel || result.label}</span></div><p><Highlight text={resultSnippet(result, terms)} terms={terms} /></p>{(result.chapterTitle || result.category) && <small><Highlight text={result.chapterTitle || result.category} terms={terms} /></small>}</div><Icon name="ArrowRight" size={16} />
     </a></li>)}</ul>
     {loadState === 'error' && <div className="gsearch-empty"><button className="text-link" onClick={() => { setLoadState('loading'); setRetry(current => current + 1); }}>重试</button></div>}

@@ -7,6 +7,7 @@ import SearchDialog from './SearchDialog.jsx';
 import Plans from './Plans.jsx';
 import { assetPlans, planFamilies, planSelectionHref } from './plans.js';
 import useBookmarks from './useBookmarks.js';
+import { revealHash } from './reading.js';
 
 export const repository = 'https://github.com/neko233-com/life-decision-guide';
 export const articleUrl = article => `/guide/${article.slug}`;
@@ -86,16 +87,7 @@ function Article({ article, html }) {
     return () => { window.removeEventListener('scroll', update); window.removeEventListener('resize', update); observer.disconnect(); };
   }, [article.slug, content]);
   useEffect(() => {
-    function revealSection() {
-      let id; try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
-      const target = id && document.getElementById(id);
-      const detail = target && (target.matches('details') ? target : target.closest('details'));
-      if (detail) {
-        for (let ancestor = detail; ancestor; ancestor = ancestor.parentElement?.closest('details')) ancestor.open = true;
-        if (target.matches('details')) target.querySelectorAll('details').forEach(item => { item.open = true; });
-      }
-      if (target) target.scrollIntoView({ block: 'start' });
-    }
+    const revealSection = () => revealHash(window.location.hash);
     revealSection();
     window.addEventListener('hashchange', revealSection);
     return () => window.removeEventListener('hashchange', revealSection);

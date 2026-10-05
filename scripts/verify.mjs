@@ -103,10 +103,22 @@ const healthSnippet = indexedTips.get('reference-book-01-tip-1-1');
 assert.equal(resultSnippet(healthSnippet, queryTerms('健康')), healthSnippet.summaryText, 'Category searches should use concise notes');
 const sourceTip = indexedTips.get('reference-book-05-tip-5-2');
 assert.ok(resultSnippet(sourceTip, queryTerms('400')).includes('400'), 'Original fields must remain visible in matching snippets');
+const updates = tips.filter(tip => tip.updateText);
+assert.equal(updates.length, 3);
+for (const tip of updates) {
+  const rendered = load(bySlug.get(tip.chapterSlug).html);
+  assert.equal(rendered(`#${tip.updateAnchor}`).length, 1, `Update anchor missing: ${tip.href}`);
+  assert.ok(rendered(`#${tip.updateAnchor} a[href^="https://"]`).length, `Update source missing: ${tip.href}`);
+  assert.ok(indexedTips.get(tip.id).searchable.includes(tip.updateText.toLowerCase()), `Update not searchable: ${tip.href}`);
+}
+assert.equal(searchIndex(index, '申请前2年内领失业保险金累计12个月').find(result => result.id === 'reference-book-05-tip-5-20')?.href, '/guide/reference-book-05#tip-5-20-update');
+assert.equal(searchIndex(index, '2025-12-31').find(result => result.id === 'reference-book-18-tip-18-1')?.href, '/guide/reference-book-18#tip-18-1-update');
+assert.ok(tipByHref.get('/guide/reference-book-13#tip-13-1').summary.includes('仅喘息也算呼吸异常'));
 assert.equal(searchIndex(index, '打分')[0].href, '/workbench');
 assert.equal(searchIndex(index, '本节条目按主题分成下面几块').find(result => result.kind === 'chapter')?.href, '/guide/reference-book-01#reading-info');
 assert.equal(searchIndex(index, '转载、改编要写明出处并附原文链接').find(result => result.kind === 'supplement')?.href, '/guide/reference-book-26#section-2');
 assert.ok(tipByHref.get('/guide/reference-book-05#tip-5-2').summary.includes('3月至6月'), 'Months must use Arabic digits in concise notes');
+assert.ok(tipByHref.get('/guide/reference-book-18#tip-18-5').title.includes('3个阶段'), 'Counts must use Arabic digits in concise titles');
 // Arithmetic, partial answers, ties and persisted v1 drafts are independently checked.
 const draft = createDraft();
 assert.ok(validDraft(draft));
