@@ -62,8 +62,10 @@ export function resultSnippet(entry, terms, maxLength = 65) {
   let source = entry.matchType === 'detail' ? entry.detailText : entry.summaryText ?? entry.text;
   if (entry.kind === 'tip') {
     const extraTerms = terms.filter(term => !entry.normalizedPlain.includes(term) && entry.normalizedText.includes(term));
-    source = entry.summaryText && terms.every(term => entry.normalizedSummary.includes(term) || entry.normalizedTitle.includes(term)) ? entry.summaryText : extraTerms.length ? entry.text : entry.plain || entry.text;
-    if (extraTerms.length) snippetTerms = extraTerms;
+    const summaryContext = `${entry.normalizedSummary} ${entry.normalizedTitle} ${entry.normalizedCategory} ${entry.normalizedChapter}`;
+    const useSummary = entry.summaryText && terms.every(term => summaryContext.includes(term));
+    source = useSummary ? entry.summaryText : extraTerms.length ? entry.text : entry.plain || entry.text;
+    if (extraTerms.length && !useSummary) snippetTerms = extraTerms;
   }
   const text = String(source || entry.text || entry.excerpt || '').replace(/\s+/g, ' ').trim();
   const normalized = normalize(text);

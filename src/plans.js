@@ -22,3 +22,10 @@ export function assetLevel(netWorth) {
 }
 
 export const planHref = level => `/guide/plan-${level.toLowerCase()}`;
+
+export function planLevelFromSearch(search) {
+  const level = new URLSearchParams(search).get('level')?.toUpperCase();
+  return assetPlans.some(plan => plan.level === level) ? level : null;
+}
+
+export const planSelectionHref = level => assetPlans.some(plan => plan.level === level) ? `/plans?level=${level}` : '/plans';

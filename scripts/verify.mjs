@@ -3,9 +3,9 @@ import { readFile, readdir, access } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { load } from 'cheerio';
 import { categories, categoryAliases } from '../src/data.js';
-import { createSearchIndex, searchIndex } from '../src/search.js';
+import { createSearchIndex, queryTerms, resultSnippet, searchIndex } from '../src/search.js';
 import { createDraft, evaluateOptions, recordMarkdown, validDraft } from '../src/scoring.js';
-import { assetLevel, assetPlans, planHref } from '../src/plans.js';
+import { assetLevel, assetPlans, planHref, planLevelFromSearch, planSelectionHref } from '../src/plans.js';
 import { readStored, writeStored } from '../src/storage.js';
 
 const normalize = value => value.replace(/\s+/g, ' ').trim();
@@ -80,18 +80,29 @@ for (const file of (await readdir('content')).filter(file => file.endsWith('.htm
 assert.equal(originalCount, tips.length, 'All source suggestions must be retained');
 
 const index = createSearchIndex(searchData.articles, searchData.categories, searchData.tips);
+const indexedTips = new Map(index.filter(entry => entry.kind === 'tip').map(entry => [entry.id, entry]));
 assert.equal(index.length, 4 + categories.length + articles.length + tips.length + articles.reduce((count, article) => count + (article.extraSections?.length || 0) + (article.groups?.length || 0), 0));
 for (const article of articles) {
+  assert.ok(searchIndex(index, article.originalTitle).some(result => result.baseHref === `/guide/${article.slug}`), `Original guide title not searchable: ${article.slug}`);
   for (const group of article.groups || []) assert.ok(searchIndex(index, group.title).some(result => result.href === `/guide/${article.slug}#${group.anchor}`), `Group not searchable: ${article.slug}#${group.anchor}`);
   for (const section of article.extraSections || []) {
     assert.ok(searchIndex(index, section.text).some(result => result.href === `/guide/${article.slug}#${section.anchor}`), `Supplement not searchable: ${article.slug}#${section.anchor}`);
   }
 }
 for (const tip of tips) {
+  const indexed = indexedTips.get(tip.id);
+  for (const key of ['plain', 'cost', 'benefit', 'evidence', 'sources', 'notes']) {
+    assert.equal(indexed[key], tip[key], `Search field changed: ${tip.href} ${key}`);
+    assert.ok(indexed.searchable.includes(tip[key].toLowerCase()), `Original field not indexed: ${tip.href} ${key}`);
+  }
   for (const title of new Set([tip.title, tip.originalTitle])) {
     assert.ok(searchIndex(index, title).some(result => result.id === tip.id && result.href === tip.href), `Not searchable: ${tip.href}`);
   }
 }
+const healthSnippet = indexedTips.get('reference-book-01-tip-1-1');
+assert.equal(resultSnippet(healthSnippet, queryTerms('健康')), healthSnippet.summaryText, 'Category searches should use concise notes');
+const sourceTip = indexedTips.get('reference-book-05-tip-5-2');
+assert.ok(resultSnippet(sourceTip, queryTerms('400')).includes('400'), 'Original fields must remain visible in matching snippets');
 assert.equal(searchIndex(index, '打分')[0].href, '/workbench');
 assert.equal(searchIndex(index, '本节条目按主题分成下面几块').find(result => result.kind === 'chapter')?.href, '/guide/reference-book-01#reading-info');
 assert.equal(searchIndex(index, '转载、改编要写明出处并附原文链接').find(result => result.kind === 'supplement')?.href, '/guide/reference-book-26#section-2');
@@ -118,6 +129,16 @@ assert.equal(evaluation.highest, null); assert.equal(evaluation.totalWeight, 0);
 assert.ok(evaluation.results.every(result => result.hundred === null && !result.complete));
 assert.equal(validDraft({ ...draft, options: [draft.options[0], draft.options[0]] }), false);
 assert.equal(validDraft(null), false);
+for (let a = 0; a <= 5; a++) for (let b = 0; b <= 5; b++) for (let c = 0; c <= 5; c++) {
+  const criteria = [a, b, c].map(weight => ({ name: '', weight }));
+  const total = a + b + c;
+  const check = evaluateOptions([{ id: 'test', name: '', scores: [5, 3, 1] }], criteria);
+  if (total) {
+    const expected = (a * 5 + b * 3 + c) / total * 20;
+    assert.ok(Math.abs(check.results[0].hundred - expected) < 1e-8, 'Weighted score mismatch');
+    assert.ok(check.complete && Number.isFinite(check.highest));
+  } else assert.equal(check.results[0].hundred, null);
+}
 // A broken or concurrently changed record must never be silently replaced.
 let stored = '{broken';
 let writes = 0;
@@ -141,6 +162,11 @@ assert.equal(JSON.parse(stored).question, 'Current edit');
 stored = null;
 assert.equal(readStored(memoryStorage, 'decision', validDraft).state, 'ready');
 assert.equal(assetPlans.length, 8);
+assert.equal(planLevelFromSearch('?level=a7'), 'A7');
+assert.equal(planLevelFromSearch('?level=A13'), null);
+assert.equal(planLevelFromSearch(''), null);
+assert.equal(planSelectionHref('A8'), '/plans?level=A8');
+assert.equal(planSelectionHref('foundation'), '/plans');
 assert.equal(articles.filter(article => article.kind === 'plan').length, 9);
 assert.equal(assetLevel(-1), null); assert.equal(assetLevel(9999), null);
 assert.equal(assetLevel(10000), 'A5'); assert.equal(assetLevel(99999), 'A5');
