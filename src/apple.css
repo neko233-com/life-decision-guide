@@ -476,6 +476,59 @@ main.home { width: 100%; max-width: none; margin: 0; }
 .decision-next .worksheet-section { padding-top: 20px; }
 .gsearch-field input:focus-visible, .library-search input:focus-visible { outline: none; box-shadow: none; }
 
+/* Questions give long chapters a readable rhythm without hiding any source. */
+.chapter-overview { margin: 24px 0 34px; }
+.chapter-hook { font-size: 12px; color: #6e6e73; }
+.chapter-jumps { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 24px; margin-top: 10px; }
+.chapter-jumps a { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 11px 0; font-size: 13px; text-decoration: none; border-bottom: 1px solid #e5e5ea; }
+.chapter-jumps small { color: #86868b; font-size: 11px; }
+.prose .group-overview-title { height: 1px; overflow: hidden; margin: 0; font-size: 0; }
+.reading-group { margin: 38px 0 42px; }
+.reading-group-heading { display: flex; align-items: center; gap: 14px; padding: 17px 19px; border-radius: 12px; background: #f5f5f7; }
+.group-number { align-self: flex-start; color: #0071e3; font-size: 12px; font-weight: 600; margin-top: 4px; }
+.reading-group-heading > div { flex: 1; min-width: 0; }
+.prose .reading-group-heading h2 { margin: 0; font-size: 21px; line-height: 1.5; }
+.prose .reading-group-heading p { margin: 4px 0 0; color: #6e6e73; font-size: 12px; line-height: 1.65; }
+.group-count { color: #86868b; font-size: 11px; white-space: nowrap; }
+.tip-heading { display: block; min-width: 0; }
+.tip-preview { display: block; margin-top: 6px; font-size: 12px; line-height: 1.75; color: #6e6e73; font-weight: 400; }
+.reference-tip[open] .tip-preview { display: none; }
+.criteria-editor > div { grid-template-columns: minmax(0,1fr) 115px; }
+.weight-share { color: #0071e3; font-size: 11px; font-weight: 400; }
+.score-rubric { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 12px; margin-bottom: 18px; }
+.score-rubric > div { padding: 13px 5px; background: #f5f5f7; border-radius: 10px; text-align: center; }
+.score-rubric strong { display: block; color: #0071e3; font-size: 20px; font-weight: 600; }
+.score-rubric span { display: block; margin-top: 5px; color: #6e6e73; font-size: 11px; }
+.comparison-table { min-width: 760px; }
+.comparison-table th small, .weighted-score small { display: block; font-size: 10px; color: #86868b; font-weight: 400; margin-top: 4px; }
+.comparison-table td select { min-width: 120px; }
+.score-breakdowns { display: grid; gap: 22px; margin: 24px 0; }
+.score-breakdown-title { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 14px; }
+.score-breakdown-title span { color: #86868b; font-size: 12px; font-variant-numeric: tabular-nums; }
+.score-bar { height: 6px; border-radius: 3px; background: #f5f5f7; overflow: hidden; margin-top: 12px; }
+.score-bar span { display: block; height: 100%; background: #0071e3; border-radius: 3px; transition: width .25s ease; }
+.score-contributions { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 11px; font-size: 11px; color: #6e6e73; }
+.score-contributions strong { color: #0071e3; font-weight: 500; }
+.score-explanation { border-top: 1px solid #e5e5ea; padding-top: 14px; }
+.score-explanation summary { cursor: pointer; font-size: 12px; color: #0071e3; }
+.score-explanation p { margin-top: 12px; font-size: 12px; color: #6e6e73; line-height: 1.8; }
+@media (max-width: 680px) {
+  .chapter-overview { margin: 21px 0 25px; }
+  .chapter-jumps { gap: 0 16px; }
+  .chapter-jumps a { font-size: 12px; }
+  .reading-group { margin: 30px 0; }
+  .reading-group-heading { gap: 10px; padding: 14px; }
+  .prose .reading-group-heading h2 { font-size: 18px; }
+  .prose .reading-group-heading p { font-size: 11px; }
+  .group-number { font-size: 10px; }
+  .tip-preview { font-size: 11px; }
+  .criteria-editor > div { grid-template-columns: minmax(0,1fr) 124px; }
+  .score-rubric { gap: 5px; }
+  .score-rubric > div { padding: 12px 2px; }
+  .score-rubric span { font-size: 9px; }
+  .score-breakdown-title { font-size: 13px; }
+}
+
 @media print {
   body, :root { background: #fff; color: #000; }
   .source-info:not([open]) > :not(summary), .tip-evidence:not([open]) > .tip-source { display: block; }

@@ -10,6 +10,7 @@
 | `content/reading-guide.json` | 页面短标题、简介和补充文档要点 |
 | `content/short-tips-01-12.json` | 第 1–12 章的一句话阅读映射 |
 | `content/short-tips-13-34.json` | 第 13–34 章的一句话阅读映射 |
+| `content/reading-groups.json` | 34 章的问题分组及稳定锚点 |
 | `scripts/build-content.mjs` | 读取原文，组合短版、原文、目录和搜索数据 |
 | `src/generated/` | 构建生成的数据，禁止手工编辑 |
 | Vite + `scripts/prerender.jsx` | 编译资源，生成逐页 HTML、搜索索引和 sitemap |
@@ -23,7 +24,7 @@
 
 全站搜索首次打开时加载 `/search-index.json`，后续复用。索引包含原创全文、补充文档、章节附加说明、建议短版、原始标题和六字段。点击结果跳转到稳定锚点，展开命中条目和必要的原文。关键词高亮使用文本片段渲染。
 
-`Workbench.jsx` 计算加权平均，权重 0 不参与。每个方案填完有效标准后显示自己的分数，全部完成后列出最高分及并列方案。收藏和决策记录使用浏览器本地存储；决策记录可导出为 Markdown。
+`scoring.js` 计算加权平均，`Workbench.jsx` 显示评分尺度、权重占比、各项贡献和结果条。100 分制等于 5 分制乘 20；权重 0 不参与，评分 0 表示未填写。每个方案填完有效标准后显示自己的分数，全部完成后列出最高分及并列方案。仍读取 `life-guide-decision-v1` 浏览器记录；决策记录可导出为 Markdown。
 
 ## URL 与分类
 

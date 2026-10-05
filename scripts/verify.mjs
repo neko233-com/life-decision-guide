@@ -4,6 +4,7 @@ import { dirname, join, resolve } from 'node:path';
 import { load } from 'cheerio';
 import { categories, categoryAliases } from '../src/data.js';
 import { createSearchIndex, searchIndex } from '../src/search.js';
+import { createDraft, evaluateOptions, recordMarkdown, validDraft } from '../src/scoring.js';
 
 const normalize = value => value.replace(/\s+/g, ' ').trim();
 const readJson = async path => JSON.parse(await readFile(path, 'utf8'));
@@ -12,6 +13,7 @@ const [articles, tips, searchData] = await Promise.all([
 ]);
 const bySlug = new Map(articles.map(article => [article.slug, article]));
 const tipByHref = new Map(tips.map(tip => [tip.href, tip]));
+const readingGroups = await readJson('content/reading-groups.json');
 assert.equal(bySlug.size, articles.length, 'Guide slugs must be unique');
 assert.equal(tipByHref.size, tips.length, 'Suggestion anchors must be unique');
 assert.equal(searchData.articles.length, articles.length, 'Search must cover all guides');
@@ -30,6 +32,15 @@ for (const file of (await readdir('content')).filter(file => file.endsWith('.htm
   if (originalBody.length) assert.equal(normalize(rendered('.full-guide-body').text()), normalize(originalBody.text()), `Full explanation changed ${slug}`);
   const intro = normalize(source('.reference-intro > div').text());
   if (intro) assert.ok(normalize(rendered('.source-info').text()).includes(intro), `Chapter introduction lost ${slug}`);
+  if (guide.tipCount > 0) {
+    const grouping = readingGroups[slug];
+    const ids = grouping.groups.flatMap(group => group.tips);
+    assert.equal(new Set(ids).size, guide.tipCount, `Group coverage missing or repeated ${slug}`);
+    assert.equal(ids.length, guide.tipCount, `Duplicate group entries ${slug}`);
+    assert.equal(rendered('.reading-group .reference-tip').length, guide.tipCount, `Ungrouped suggestions ${slug}`);
+    assert.deepEqual(rendered('.reading-group .reference-tip').toArray().map(element => rendered(element).attr('id')), ids, `Wrong grouping ${slug}`);
+    assert.equal(rendered('.chapter-jumps a').length, grouping.groups.length);
+  }
   if (source('article').attr('data-kind') === 'reference') {
     const attribution = rendered('.source-info');
     assert.ok(attribution.text().includes('eternity4719'), `Author missing ${slug}`);
@@ -67,8 +78,9 @@ for (const file of (await readdir('content')).filter(file => file.endsWith('.htm
 assert.equal(originalCount, tips.length, 'All source suggestions must be retained');
 
 const index = createSearchIndex(searchData.articles, searchData.categories, searchData.tips);
-assert.equal(index.length, 3 + categories.length + articles.length + tips.length + articles.reduce((count, article) => count + (article.extraSections?.length || 0), 0));
+assert.equal(index.length, 3 + categories.length + articles.length + tips.length + articles.reduce((count, article) => count + (article.extraSections?.length || 0) + (article.groups?.length || 0), 0));
 for (const article of articles) {
+  for (const group of article.groups || []) assert.ok(searchIndex(index, group.title).some(result => result.href === `/guide/${article.slug}#${group.anchor}`), `Group not searchable: ${article.slug}#${group.anchor}`);
   for (const section of article.extraSections || []) {
     assert.ok(searchIndex(index, section.text).some(result => result.href === `/guide/${article.slug}#${section.anchor}`), `Supplement not searchable: ${article.slug}#${section.anchor}`);
   }
@@ -81,6 +93,29 @@ for (const tip of tips) {
 assert.equal(searchIndex(index, '打分')[0].href, '/workbench');
 assert.equal(searchIndex(index, '本节条目按主题分成下面几块').find(result => result.kind === 'chapter')?.href, '/guide/reference-book-01#reading-info');
 assert.equal(searchIndex(index, '转载、改编要写明出处并附原文链接').find(result => result.kind === 'supplement')?.href, '/guide/reference-book-26#section-2');
+assert.ok(tipByHref.get('/guide/reference-book-05#tip-5-2').summary.includes('3月至6月'), 'Months must use Arabic digits in concise notes');
+// Arithmetic, partial answers, ties and persisted v1 drafts are independently checked.
+const draft = createDraft();
+assert.ok(validDraft(draft));
+draft.criteria = [{ name: '目标', weight: 5 }, { name: '可行', weight: 3 }, { name: '可逆', weight: 0 }];
+draft.options[0].scores = [5, 3, 0]; draft.options[1].scores = [3, 5, 0];
+let evaluation = evaluateOptions(draft.options, draft.criteria);
+assert.equal(evaluation.results[0].hundred, 85); assert.equal(evaluation.results[0].five, 4.25);
+assert.equal(evaluation.results[1].hundred, 75); assert.equal(evaluation.results[1].five, 3.75);
+assert.equal(evaluation.winners[0].id, 'a');
+assert.ok(validDraft(JSON.parse(JSON.stringify(draft))), 'Existing v1 record must remain readable');
+assert.ok(recordMarkdown(draft).includes('85.0 / 100（4.25 / 5）'));
+assert.ok(recordMarkdown(draft).includes('\n## 比较标准\n'));
+draft.options[1].scores = [5, 3, 5];
+assert.equal(evaluateOptions(draft.options, draft.criteria).winners.length, 2, 'Zero weight must not break a tie');
+draft.options[1].scores = [0, 3, 0];
+assert.equal(evaluateOptions(draft.options, draft.criteria).winners.length, 0, 'Pending scores must not create a winner');
+draft.criteria.forEach(item => { item.weight = 0; });
+evaluation = evaluateOptions(draft.options, draft.criteria);
+assert.equal(evaluation.highest, null); assert.equal(evaluation.totalWeight, 0);
+assert.ok(evaluation.results.every(result => result.hundred === null && !result.complete));
+assert.equal(validDraft({ ...draft, options: [draft.options[0], draft.options[0]] }), false);
+assert.equal(validDraft(null), false);
 
 const routes = ['/', '/guides', '/workbench', ...categories.map(category => `/guides/${category.id}`), ...articles.map(article => `/guide/${article.slug}`), '/404'];
 const pages = new Map();

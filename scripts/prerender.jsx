@@ -27,6 +27,6 @@ for (const path of paths) {
 }
 await mkdir('dist/content', { recursive: true });
 for (const article of articles) await writeFile(`dist/content/${article.slug}.html`, article.html);
-await writeFile('dist/search-index.json', JSON.stringify({ categories, articles: articles.map(({ slug, title, originalTitle, kind, category, tipCount, summaryText, detailText, extraSections, excerpt }) => ({ slug, title, originalTitle, kind, category, tipCount, summaryText, excerpt, detailText, extraSections })), tips: tips.map(({ text, ...tip }) => tip) }));
+await writeFile('dist/search-index.json', JSON.stringify({ categories, articles: articles.map(({ slug, title, originalTitle, kind, category, tipCount, groups, summaryText, detailText, extraSections, excerpt }) => ({ slug, title, originalTitle, kind, category, tipCount, groups, summaryText, excerpt, detailText, extraSections })), tips: tips.map(({ text, ...tip }) => tip) }));
 await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.filter(path => path !== '/404' && path !== '/workbench').map(path => `<url><loc>https://life.neko233.com${path === '/' ? '/' : path}</loc></url>`).join('')}</urlset>\n`);
 console.log(`Prerendered ${paths.length} pages with readable HTML and page-specific metadata.`);

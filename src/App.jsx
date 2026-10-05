@@ -89,8 +89,8 @@ function Article({ article, html }) {
       if (detail) {
         for (let ancestor = detail; ancestor; ancestor = ancestor.parentElement?.closest('details')) ancestor.open = true;
         if (target.matches('details')) target.querySelectorAll('details').forEach(item => { item.open = true; });
-        target.scrollIntoView({ block: 'start' });
       }
+      if (target) target.scrollIntoView({ block: 'start' });
     }
     revealSection();
     window.addEventListener('hashchange', revealSection);

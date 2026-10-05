@@ -3,6 +3,7 @@ import { load } from 'cheerio';
 import { categoryAliases } from '../src/data.js';
 
 const readingGuide = JSON.parse(await readFile('content/reading-guide.json', 'utf8'));
+const readingGroups = JSON.parse(await readFile('content/reading-groups.json', 'utf8'));
 const shortTipFiles = ['content/short-tips-01-12.json', 'content/short-tips-13-34.json'];
 const readingMaps = await Promise.all(shortTipFiles.map(async file => JSON.parse(await readFile(file, 'utf8'))));
 const noteKeys = readingMaps.flatMap(map => Object.keys(map));
@@ -73,21 +74,57 @@ for (const file of (await readdir('content')).filter(file => file.endsWith('.htm
     }
     tips.push({ id: `${slug}-${id}`, title: note?.title || originalTipTitle, originalTitle: originalTipTitle, summary: note?.summary || '', plain: fields['说人话'] || '', cost: fields['成本'] || '', benefit: fields['收益'] || '', evidence: fields['证据等级'] || '', sources: fields['来源'] || fields['原始出处'] || '', notes: fields['备注'] || '', text: body.text().replace(/\s+/g, ' ').trim(), href: `/guide/${slug}#${id}`, chapterSlug: slug, chapterTitle: title, category });
   });
+  const grouping = readingGroups[slug];
+  const groups = [];
+  if (article.find('.reference-tip').length && !grouping) throw new Error(`Missing chapter groups: ${slug}`);
+  if (grouping) {
+    const nodes = new Map(article.find('.reference-tip').toArray().map(node => [$(node).attr('id'), $(node)]));
+    const groupedIds = grouping.groups.flatMap(group => group.tips);
+    if (new Set(groupedIds).size !== groupedIds.length || groupedIds.length !== nodes.size || groupedIds.some(id => !nodes.has(id))) throw new Error(`Invalid group coverage: ${slug}`);
+    const overview = $('<section class="chapter-overview"><p class="chapter-hook"></p><nav class="chapter-jumps" aria-label="按问题阅读"></nav></section>');
+    article.find('.lead').text(grouping.hook);
+    overview.find('.chapter-hook').text(`${grouping.groups.length} 个主题，选与你有关的一组。`);
+    const heading = article.find('h2#reference-tips');
+    heading.text('按问题阅读').before(overview);
+    let last = heading;
+    grouping.groups.forEach((group, index) => {
+      const section = $('<section class="reading-group"><div class="reading-group-heading"><span class="group-number"></span><div><h2></h2><p></p></div><span class="group-count"></span></div></section>');
+      section.find('h2').attr('id', group.id).text(group.title);
+      section.find('.group-number').text(String(index + 1).padStart(2, '0'));
+      section.find('.reading-group-heading p').text(group.description || '选 1 条与你有关的建议，展开看怎么做。');
+      section.find('.group-count').text(`${group.tips.length} 条`);
+      for (const [tipIndex, id] of group.tips.entries()) {
+        const tip = nodes.get(id).remove();
+        if (tipIndex === 0) {
+          tip.addClass('group-start');
+          const preview = $('<span class="tip-preview"></span>').text(tip.find('.tip-summary').text());
+          tip.find('.tip-title').wrap('<span class="tip-heading"></span>').after(preview);
+        }
+        section.append(tip);
+      }
+      last.after(section); last = section;
+      const jump = $('<a><span></span><small></small></a>').attr('href', `#${group.id}`);
+      jump.find('span').text(group.title); jump.find('small').text(group.tips.length);
+      overview.find('nav').append(jump);
+      groups.push({ anchor: group.id, title: group.title, description: group.description, count: group.tips.length });
+    });
+    heading.addClass('group-overview-title');
+  }
   const text = article.text().replace(/\s+/g, ' ').trim();
   const summary = article.clone();
-  summary.find('.full-guide, .reference-tip, .source-info, .reference-extra').remove();
+  summary.find('.full-guide, .reference-tip, .source-info, .reference-extra, .chapter-overview, .reading-group, .group-overview-title').remove();
   const summaryText = summary.text().replace(/\s+/g, ' ').trim();
   const tipCount = article.find('.reference-tip').length;
   const detailText = tipCount ? introductionText : article.find('.full-guide-body').text().replace(/\s+/g, ' ').trim();
   const extraSections = article.find('.reference-extra').toArray().map(section => ({ anchor: $(section).find('h2').attr('id'), title: $(section).find('h2').text(), text: $(section).text().replace(/\s+/g, ' ').trim() }));
   const toc = article.find('h2').toArray().filter(heading => !$(heading).closest('.full-guide, .source-info, .tip-source').length).map(heading => ({ id: $(heading).attr('id'), title: $(heading).text() }));
   if (article.find('.full-guide').length) toc.push({ id: 'full-guide', title: '完整内容' });
-  articles.push({ slug, title, originalTitle, category, kind: article.attr('data-kind') || 'original', tipCount, source: article.attr('data-source-url') ? { url: article.attr('data-source-url'), path: article.attr('data-source-path') } : null, order: Number(article.attr('data-order')), excerpt: article.find('.lead').text(), html: article.html(), text, summaryText, detailText, extraSections, toc, minutes: Math.max(1, Math.ceil(summaryText.replace(/\s/g, '').length / 260)) });
+  articles.push({ slug, title, originalTitle, category, kind: article.attr('data-kind') || 'original', tipCount, groups, source: article.attr('data-source-url') ? { url: article.attr('data-source-url'), path: article.attr('data-source-path') } : null, order: Number(article.attr('data-order')), excerpt: article.find('.lead').text(), html: article.html(), text, summaryText, detailText, extraSections, toc, minutes: Math.max(1, Math.ceil(summaryText.replace(/\s/g, '').length / 260)) });
 }
 for (const key of Object.keys(shortTips)) if (!usedNotes.has(key)) throw new Error(`Unknown concise reading note: ${key}`);
 articles.sort((a, b) => (a.kind === 'reference' ? 0 : 1) - (b.kind === 'reference' ? 0 : 1) || a.order - b.order);
 await mkdir('src/generated', { recursive: true });
 await writeFile('src/generated/content.json', JSON.stringify(articles));
-await writeFile('src/generated/metadata.json', JSON.stringify(articles.map(({ html, text, summaryText, detailText, extraSections, ...metadata }) => metadata)));
+await writeFile('src/generated/metadata.json', JSON.stringify(articles.map(({ html, text, summaryText, detailText, extraSections, groups, ...metadata }) => metadata)));
 await writeFile('src/generated/tips.json', JSON.stringify(tips));
 console.log(`Prepared ${articles.length} HTML guides, ${tips.length} suggestions and ${usedNotes.size} concise reading notes.`);

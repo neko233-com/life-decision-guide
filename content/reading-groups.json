@@ -1,0 +1,1838 @@
+{
+  "reference-book-01": {
+    "hook": "先检查身边能预防的风险：路上、家中，再到身体信号。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "路上安全",
+        "description": "",
+        "tips": [
+          "tip-1-1",
+          "tip-1-2",
+          "tip-1-9",
+          "tip-1-10"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "家中火、气、电",
+        "description": "",
+        "tips": [
+          "tip-1-3",
+          "tip-1-4",
+          "tip-1-6",
+          "tip-1-26",
+          "tip-1-42"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "儿童、老人及户外",
+        "description": "",
+        "tips": [
+          "tip-1-11",
+          "tip-1-12",
+          "tip-1-13",
+          "tip-1-5",
+          "tip-1-36",
+          "tip-1-41"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "疫苗与接种",
+        "description": "",
+        "tips": [
+          "tip-1-14",
+          "tip-1-15",
+          "tip-1-16",
+          "tip-1-20",
+          "tip-1-21",
+          "tip-1-22"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "筛查与检查",
+        "description": "",
+        "tips": [
+          "tip-1-7",
+          "tip-1-8",
+          "tip-1-17",
+          "tip-1-18",
+          "tip-1-19",
+          "tip-1-23",
+          "tip-1-24",
+          "tip-1-39",
+          "tip-1-40"
+        ]
+      },
+      {
+        "id": "group-6",
+        "title": "身体信号与性健康",
+        "description": "",
+        "tips": [
+          "tip-1-27",
+          "tip-1-28",
+          "tip-1-29",
+          "tip-1-30",
+          "tip-1-31",
+          "tip-1-38"
+        ]
+      },
+      {
+        "id": "group-7",
+        "title": "心理危机与求助",
+        "description": "",
+        "tips": [
+          "tip-1-25",
+          "tip-1-32",
+          "tip-1-37",
+          "tip-1-33",
+          "tip-1-34",
+          "tip-1-35"
+        ]
+      }
+    ]
+  },
+  "reference-book-02": {
+    "hook": "想让身体舒服些？先选 1 个你愿意持续的小习惯。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "烟、酒与槟榔",
+        "description": "",
+        "tips": [
+          "tip-2-1",
+          "tip-2-2",
+          "tip-2-3",
+          "tip-2-4",
+          "tip-2-5",
+          "tip-2-6",
+          "tip-2-8",
+          "tip-2-19",
+          "tip-2-20",
+          "tip-2-21"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "少吃少喝什么",
+        "description": "",
+        "tips": [
+          "tip-2-7",
+          "tip-2-18",
+          "tip-2-28",
+          "tip-2-30"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "饮食怎么换",
+        "description": "",
+        "tips": [
+          "tip-2-9",
+          "tip-2-22",
+          "tip-2-23",
+          "tip-2-24",
+          "tip-2-25",
+          "tip-2-26",
+          "tip-2-27",
+          "tip-2-33",
+          "tip-2-34",
+          "tip-2-35"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "运动与体重",
+        "description": "",
+        "tips": [
+          "tip-2-11",
+          "tip-2-14",
+          "tip-2-15",
+          "tip-2-16",
+          "tip-2-17",
+          "tip-2-32"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "睡眠与夜班",
+        "description": "",
+        "tips": [
+          "tip-2-13",
+          "tip-2-37",
+          "tip-2-38",
+          "tip-2-39"
+        ]
+      },
+      {
+        "id": "group-6",
+        "title": "厨房与油烟",
+        "description": "",
+        "tips": [
+          "tip-2-29",
+          "tip-2-40",
+          "tip-2-41",
+          "tip-2-42"
+        ]
+      },
+      {
+        "id": "group-7",
+        "title": "口腔、用药与日常",
+        "description": "",
+        "tips": [
+          "tip-2-10",
+          "tip-2-12",
+          "tip-2-31",
+          "tip-2-36"
+        ]
+      }
+    ]
+  },
+  "reference-book-03": {
+    "hook": "明明没做多少事，为什么这么累？从睡眠和打断开始查。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "工作与专注",
+        "description": "",
+        "tips": [
+          "tip-3-1",
+          "tip-3-5",
+          "tip-3-6",
+          "tip-3-7",
+          "tip-3-12",
+          "tip-3-13"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "睡眠与熬夜",
+        "description": "",
+        "tips": [
+          "tip-3-2",
+          "tip-3-3",
+          "tip-3-4",
+          "tip-3-8",
+          "tip-3-9",
+          "tip-3-10",
+          "tip-3-11"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "反复想个不停",
+        "description": "",
+        "tips": [
+          "tip-3-14",
+          "tip-3-15",
+          "tip-3-21",
+          "tip-3-22"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "愤怒与情绪",
+        "description": "",
+        "tips": [
+          "tip-3-17",
+          "tip-3-18",
+          "tip-3-23",
+          "tip-3-24"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "社交与边界",
+        "description": "",
+        "tips": [
+          "tip-3-16",
+          "tip-3-19",
+          "tip-3-20"
+        ]
+      }
+    ]
+  },
+  "reference-book-04": {
+    "hook": "事情总做不完？先缩小任务，再给注意力留出空间。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "把任务做小",
+        "description": "开始之前先定义完成条件。",
+        "tips": [
+          "tip-4-1",
+          "tip-4-5",
+          "tip-4-7",
+          "tip-4-8",
+          "tip-4-9"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "投入与退出",
+        "description": "把时间花在仍然值得做的事上。",
+        "tips": [
+          "tip-4-2",
+          "tip-4-3",
+          "tip-4-4",
+          "tip-4-14"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "专注与习惯",
+        "description": "减少打断，让重复的事更省力。",
+        "tips": [
+          "tip-4-6",
+          "tip-4-10",
+          "tip-4-11",
+          "tip-4-12",
+          "tip-4-13"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "省下日常时间",
+        "description": "从屏幕、工具和通勤找机会。",
+        "tips": [
+          "tip-4-15",
+          "tip-4-16",
+          "tip-4-17",
+          "tip-4-18"
+        ]
+      }
+    ]
+  },
+  "reference-book-05": {
+    "hook": "钱花到哪里去了？先减掉漏水的开销，再看借贷、投资和保障。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "日常开销",
+        "description": "",
+        "tips": [
+          "tip-5-1",
+          "tip-5-4",
+          "tip-5-11",
+          "tip-5-12",
+          "tip-5-14",
+          "tip-5-21",
+          "tip-5-23",
+          "tip-5-24"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "冲动消费与孩子花钱",
+        "description": "",
+        "tips": [
+          "tip-5-5",
+          "tip-5-8",
+          "tip-5-9",
+          "tip-5-10",
+          "tip-5-33",
+          "tip-5-34",
+          "tip-5-35"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "购物与维权",
+        "description": "",
+        "tips": [
+          "tip-5-22",
+          "tip-5-29",
+          "tip-5-30",
+          "tip-5-31",
+          "tip-5-32",
+          "tip-5-36"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "税、公积金与医保",
+        "description": "",
+        "tips": [
+          "tip-5-2",
+          "tip-5-3",
+          "tip-5-13",
+          "tip-5-20"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "储蓄、借贷与投资",
+        "description": "",
+        "tips": [
+          "tip-5-6",
+          "tip-5-7",
+          "tip-5-15",
+          "tip-5-16",
+          "tip-5-17",
+          "tip-5-18",
+          "tip-5-19",
+          "tip-5-27",
+          "tip-5-28",
+          "tip-5-37",
+          "tip-5-38",
+          "tip-5-45"
+        ]
+      },
+      {
+        "id": "group-6",
+        "title": "保险与保障",
+        "description": "",
+        "tips": [
+          "tip-5-25",
+          "tip-5-26",
+          "tip-5-39",
+          "tip-5-40",
+          "tip-5-41",
+          "tip-5-42",
+          "tip-5-43",
+          "tip-5-44"
+        ]
+      }
+    ]
+  },
+  "reference-book-06": {
+    "hook": "看起来很有用，值得花钱吗？先检查证据和适用条件。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "保健品与补剂",
+        "description": "",
+        "tips": [
+          "tip-6-1",
+          "tip-6-2",
+          "tip-6-3",
+          "tip-6-4",
+          "tip-6-5",
+          "tip-6-6",
+          "tip-6-10",
+          "tip-6-11",
+          "tip-6-13"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "体检与小毛病",
+        "description": "",
+        "tips": [
+          "tip-6-7",
+          "tip-6-18",
+          "tip-6-19",
+          "tip-6-20",
+          "tip-6-21"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "常见养生说法",
+        "description": "",
+        "tips": [
+          "tip-6-8",
+          "tip-6-9",
+          "tip-6-12",
+          "tip-6-14",
+          "tip-6-16",
+          "tip-6-17",
+          "tip-6-26",
+          "tip-6-29"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "花钱买运气与心情",
+        "description": "",
+        "tips": [
+          "tip-6-15",
+          "tip-6-22",
+          "tip-6-23",
+          "tip-6-24"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "意志力与性健康",
+        "description": "",
+        "tips": [
+          "tip-6-25",
+          "tip-6-27",
+          "tip-6-28"
+        ]
+      }
+    ]
+  },
+  "reference-book-07": {
+    "hook": "收入突然停了，先稳住吃住、医保，再重新找机会。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "失业后的支持",
+        "description": "",
+        "tips": [
+          "tip-7-1",
+          "tip-7-12",
+          "tip-7-13"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "被欠工资",
+        "description": "",
+        "tips": [
+          "tip-7-2",
+          "tip-7-3",
+          "tip-7-22"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "紧急救助",
+        "description": "",
+        "tips": [
+          "tip-7-4",
+          "tip-7-6",
+          "tip-7-7",
+          "tip-7-8",
+          "tip-7-11",
+          "tip-7-21"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "医保与社保",
+        "description": "",
+        "tips": [
+          "tip-7-9",
+          "tip-7-10",
+          "tip-7-18",
+          "tip-7-20"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "找工作与重新开始",
+        "description": "",
+        "tips": [
+          "tip-7-5",
+          "tip-7-14",
+          "tip-7-15",
+          "tip-7-19"
+        ]
+      },
+      {
+        "id": "group-6",
+        "title": "住处与吃饭",
+        "description": "",
+        "tips": [
+          "tip-7-16",
+          "tip-7-17"
+        ]
+      }
+    ]
+  },
+  "reference-book-08": {
+    "hook": "遇到纠纷别只争一口气：先保安全、留证据、找渠道。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "防骗与止损",
+        "description": "",
+        "tips": [
+          "tip-8-2",
+          "tip-8-3",
+          "tip-8-4",
+          "tip-8-8",
+          "tip-8-9",
+          "tip-8-22",
+          "tip-8-27",
+          "tip-8-29",
+          "tip-8-45"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "签字、借款与债务",
+        "description": "",
+        "tips": [
+          "tip-8-17",
+          "tip-8-18",
+          "tip-8-19",
+          "tip-8-20",
+          "tip-8-21",
+          "tip-8-28",
+          "tip-8-44"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "冲突与人身安全",
+        "description": "",
+        "tips": [
+          "tip-8-10",
+          "tip-8-11",
+          "tip-8-12",
+          "tip-8-13",
+          "tip-8-14",
+          "tip-8-15",
+          "tip-8-38"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "恋爱与婚姻",
+        "description": "",
+        "tips": [
+          "tip-8-23",
+          "tip-8-24",
+          "tip-8-25",
+          "tip-8-26",
+          "tip-8-43"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "报警、指控与证据",
+        "description": "",
+        "tips": [
+          "tip-8-5",
+          "tip-8-6",
+          "tip-8-33",
+          "tip-8-34",
+          "tip-8-35",
+          "tip-8-39",
+          "tip-8-40",
+          "tip-8-41",
+          "tip-8-42"
+        ]
+      },
+      {
+        "id": "group-6",
+        "title": "网络言论与网暴",
+        "description": "",
+        "tips": [
+          "tip-8-16",
+          "tip-8-37"
+        ]
+      },
+      {
+        "id": "group-7",
+        "title": "性与被要挟",
+        "description": "",
+        "tips": [
+          "tip-8-31",
+          "tip-8-32",
+          "tip-8-36"
+        ]
+      },
+      {
+        "id": "group-8",
+        "title": "驾驶与养宠",
+        "description": "",
+        "tips": [
+          "tip-8-1",
+          "tip-8-7",
+          "tip-8-30"
+        ]
+      }
+    ]
+  },
+  "reference-book-09": {
+    "hook": "一个顺手的举动也可能踩线。按场景查，行动前核对规则。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "发帖与转发",
+        "description": "",
+        "tips": [
+          "tip-9-1",
+          "tip-9-2",
+          "tip-9-3",
+          "tip-9-4"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "收款、贷款与理赔",
+        "description": "",
+        "tips": [
+          "tip-9-5",
+          "tip-9-6",
+          "tip-9-7",
+          "tip-9-8",
+          "tip-9-16",
+          "tip-9-21"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "日常行为",
+        "description": "",
+        "tips": [
+          "tip-9-9",
+          "tip-9-10",
+          "tip-9-11",
+          "tip-9-13",
+          "tip-9-14"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "冲突与执法",
+        "description": "",
+        "tips": [
+          "tip-9-15",
+          "tip-9-17",
+          "tip-9-19"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "性、孩子与身体",
+        "description": "",
+        "tips": [
+          "tip-9-12",
+          "tip-9-18",
+          "tip-9-20",
+          "tip-9-22",
+          "tip-9-23"
+        ]
+      },
+      {
+        "id": "group-6",
+        "title": "版权与创作",
+        "description": "",
+        "tips": [
+          "tip-9-24",
+          "tip-9-25"
+        ]
+      }
+    ]
+  },
+  "reference-book-10": {
+    "hook": "关系要不要往前走？把感受、日常分工和钱都谈清楚。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "认识与相处",
+        "description": "",
+        "tips": [
+          "tip-10-1",
+          "tip-10-2",
+          "tip-10-3",
+          "tip-10-5",
+          "tip-10-6"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "关系质量",
+        "description": "",
+        "tips": [
+          "tip-10-4",
+          "tip-10-17",
+          "tip-10-20"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "结婚的日常成本",
+        "description": "",
+        "tips": [
+          "tip-10-7",
+          "tip-10-8",
+          "tip-10-9",
+          "tip-10-15",
+          "tip-10-16"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "登记与婚检",
+        "description": "",
+        "tips": [
+          "tip-10-13",
+          "tip-10-14"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "钱与债务",
+        "description": "",
+        "tips": [
+          "tip-10-10",
+          "tip-10-11",
+          "tip-10-12"
+        ]
+      },
+      {
+        "id": "group-6",
+        "title": "同性伴侣与安排",
+        "description": "",
+        "tips": [
+          "tip-10-18",
+          "tip-10-19"
+        ]
+      }
+    ]
+  },
+  "reference-book-11": {
+    "hook": "接项目、写代码、用开源：先看授权与责任边界。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "接单与授权",
+        "description": "先确认业务、工具和测试权限。",
+        "tips": [
+          "tip-11-1",
+          "tip-11-2",
+          "tip-11-3",
+          "tip-11-4",
+          "tip-11-5",
+          "tip-11-8",
+          "tip-11-9"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "工作与代码归属",
+        "description": "离职、兼职之前核对约定。",
+        "tips": [
+          "tip-11-6",
+          "tip-11-7",
+          "tip-11-12",
+          "tip-11-13",
+          "tip-11-14"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "安全与上线合规",
+        "description": "漏洞披露和产品发布都有边界。",
+        "tips": [
+          "tip-11-10",
+          "tip-11-11",
+          "tip-11-15",
+          "tip-11-16",
+          "tip-11-17"
+        ]
+      }
+    ]
+  },
+  "reference-book-12": {
+    "hook": "想开始自己的生意？先找顾客，再算最坏能承受多少。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "投入与家庭风险",
+        "description": "",
+        "tips": [
+          "tip-12-1",
+          "tip-12-2",
+          "tip-12-3",
+          "tip-12-4",
+          "tip-12-5",
+          "tip-12-24"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "注册与许可",
+        "description": "",
+        "tips": [
+          "tip-12-6",
+          "tip-12-7"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "食品业务",
+        "description": "",
+        "tips": [
+          "tip-12-8",
+          "tip-12-9",
+          "tip-12-10",
+          "tip-12-11"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "税务与发票",
+        "description": "",
+        "tips": [
+          "tip-12-12",
+          "tip-12-13",
+          "tip-12-14"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "合同与用人",
+        "description": "",
+        "tips": [
+          "tip-12-15",
+          "tip-12-16",
+          "tip-12-17",
+          "tip-12-22"
+        ]
+      },
+      {
+        "id": "group-6",
+        "title": "产品与进货",
+        "description": "",
+        "tips": [
+          "tip-12-18",
+          "tip-12-19",
+          "tip-12-20",
+          "tip-12-21"
+        ]
+      },
+      {
+        "id": "group-7",
+        "title": "退出与清算",
+        "description": "",
+        "tips": [
+          "tip-12-23"
+        ]
+      }
+    ]
+  },
+  "reference-book-13": {
+    "hook": "急事按症状和现场找。危急情况先联系当地急救服务。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "复苏与噎住",
+        "description": "",
+        "tips": [
+          "tip-13-1",
+          "tip-13-2",
+          "tip-13-26",
+          "tip-13-43",
+          "tip-13-44"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "突发急症",
+        "description": "",
+        "tips": [
+          "tip-13-3",
+          "tip-13-4",
+          "tip-13-5",
+          "tip-13-6",
+          "tip-13-7",
+          "tip-13-8",
+          "tip-13-9",
+          "tip-13-10",
+          "tip-13-11",
+          "tip-13-15",
+          "tip-13-16",
+          "tip-13-17"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "外伤与烫伤",
+        "description": "",
+        "tips": [
+          "tip-13-12",
+          "tip-13-13",
+          "tip-13-14",
+          "tip-13-40",
+          "tip-13-41"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "中毒、火灾与意外",
+        "description": "",
+        "tips": [
+          "tip-13-18",
+          "tip-13-19",
+          "tip-13-20",
+          "tip-13-21",
+          "tip-13-22",
+          "tip-13-23",
+          "tip-13-24",
+          "tip-13-25",
+          "tip-13-30"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "野外风险",
+        "description": "",
+        "tips": [
+          "tip-13-27",
+          "tip-13-28",
+          "tip-13-29",
+          "tip-13-31",
+          "tip-13-32",
+          "tip-13-33",
+          "tip-13-34",
+          "tip-13-35"
+        ]
+      },
+      {
+        "id": "group-6",
+        "title": "冲突与救助",
+        "description": "",
+        "tips": [
+          "tip-13-36",
+          "tip-13-37",
+          "tip-13-39"
+        ]
+      },
+      {
+        "id": "group-7",
+        "title": "性侵与 HIV 暴露",
+        "description": "",
+        "tips": [
+          "tip-13-38",
+          "tip-13-42"
+        ]
+      }
+    ]
+  },
+  "reference-book-14": {
+    "hook": "手机丢了、账号被盗怎么办？先把关键防线设好。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "先加固账号",
+        "description": "保护登录与重要权限。",
+        "tips": [
+          "tip-14-1",
+          "tip-14-2",
+          "tip-14-3",
+          "tip-14-6"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "丢失或盗刷后",
+        "description": "先控制损失，再保留证据。",
+        "tips": [
+          "tip-14-4",
+          "tip-14-5"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "少交个人信息",
+        "description": "查看收集范围和替代方式。",
+        "tips": [
+          "tip-14-7",
+          "tip-14-8",
+          "tip-14-9"
+        ]
+      }
+    ]
+  },
+  "reference-book-15": {
+    "hook": "租还是买、住哪里？先看真实成本、合同和交易安全。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "租房与合同",
+        "description": "付款、搬家前看清权利与限制。",
+        "tips": [
+          "tip-15-1",
+          "tip-15-2",
+          "tip-15-3",
+          "tip-15-5",
+          "tip-15-8"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "付款与产权",
+        "description": "看清收款人、房屋和资金去向。",
+        "tips": [
+          "tip-15-4",
+          "tip-15-6",
+          "tip-15-7"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "乡村与特殊房源",
+        "description": "核对土地和房屋的法律性质。",
+        "tips": [
+          "tip-15-9"
+        ]
+      }
+    ]
+  },
+  "reference-book-16": {
+    "hook": "慢性病要长期管。把复诊、用药和就医安排成能执行的日常。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "长期就医安排",
+        "description": "把复诊、报销和取药排好。",
+        "tips": [
+          "tip-16-2",
+          "tip-16-3",
+          "tip-16-5",
+          "tip-16-6"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "用药与治疗边界",
+        "description": "有疑问向医生核对，避免自行停药。",
+        "tips": [
+          "tip-16-1",
+          "tip-16-4"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "按疾病找提醒",
+        "description": "看适用条件，再与自己的病情对照。",
+        "tips": [
+          "tip-16-7",
+          "tip-16-8",
+          "tip-16-9"
+        ]
+      }
+    ]
+  },
+  "reference-book-17": {
+    "hook": "照顾父母，不只有看病：还包括防骗、照护和提前安排。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "提前安排",
+        "description": "把照护、监护和重要文件说清楚。",
+        "tips": [
+          "tip-17-1",
+          "tip-17-2",
+          "tip-17-7"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "保护老人财产",
+        "description": "遇到高收益或催促付款，先核实。",
+        "tips": [
+          "tip-17-3",
+          "tip-17-4",
+          "tip-17-5",
+          "tip-17-6"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "日常照护与就医",
+        "description": "关注需要持续照料的身体问题。",
+        "tips": [
+          "tip-17-8",
+          "tip-17-9"
+        ]
+      }
+    ]
+  },
+  "reference-book-18": {
+    "hook": "要不要养育孩子？把钱、时间、支持和分工一起看。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "政策与工作支持",
+        "description": "核对当地待遇和职场权益。",
+        "tips": [
+          "tip-18-1",
+          "tip-18-2",
+          "tip-18-3"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "成本、分工与选择",
+        "description": "把家庭支持和长期投入放在一起。",
+        "tips": [
+          "tip-18-4",
+          "tip-18-5",
+          "tip-18-6"
+        ]
+      }
+    ]
+  },
+  "reference-book-19": {
+    "hook": "工资和离职遇到问题？按情境找到证据、程序与期限。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "在职工资与休假",
+        "description": "先看劳动关系和工作记录。",
+        "tips": [
+          "tip-19-1",
+          "tip-19-2",
+          "tip-19-3"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "离职与补偿",
+        "description": "保存证据，再核对程序和期限。",
+        "tips": [
+          "tip-19-4",
+          "tip-19-5",
+          "tip-19-6",
+          "tip-19-7",
+          "tip-19-8",
+          "tip-19-17",
+          "tip-19-18"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "岗位安全与工伤",
+        "description": "从预防到待遇，按发生阶段查。",
+        "tips": [
+          "tip-19-9",
+          "tip-19-10",
+          "tip-19-11",
+          "tip-19-12",
+          "tip-19-13",
+          "tip-19-14",
+          "tip-19-15"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "职场冲突",
+        "description": "保留事实，寻找可用的支持渠道。",
+        "tips": [
+          "tip-19-16"
+        ]
+      }
+    ]
+  },
+  "reference-book-20": {
+    "hook": "新生儿照护信息太多？先看睡眠、喂养与需要就医的信号。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "睡眠与居家安全",
+        "description": "先排除能避免的意外。",
+        "tips": [
+          "tip-20-1",
+          "tip-20-9",
+          "tip-20-10",
+          "tip-20-11"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "喂养与营养",
+        "description": "按年龄核对适用条件。",
+        "tips": [
+          "tip-20-4",
+          "tip-20-5",
+          "tip-20-6",
+          "tip-20-7",
+          "tip-20-12"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "预防与就医信号",
+        "description": "接种、发热和黄疸分别看。",
+        "tips": [
+          "tip-20-2",
+          "tip-20-3",
+          "tip-20-8",
+          "tip-20-13"
+        ]
+      }
+    ]
+  },
+  "reference-book-21": {
+    "hook": "出发之前多做几项准备，遇到意外时就少一些慌乱。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "出发前核对",
+        "description": "查看目的地、证件和保障。",
+        "tips": [
+          "tip-21-1",
+          "tip-21-2",
+          "tip-21-3",
+          "tip-21-4",
+          "tip-21-7",
+          "tip-21-11"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "旅行中的安全",
+        "description": "出行和付款时保留选择余地。",
+        "tips": [
+          "tip-21-6",
+          "tip-21-8"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "工作、签证与中介",
+        "description": "先核实真实性，别交出关键证件。",
+        "tips": [
+          "tip-21-5",
+          "tip-21-9",
+          "tip-21-10"
+        ]
+      }
+    ]
+  },
+  "reference-book-22": {
+    "hook": "放松也可以简单。先看活动是否安全，再选适合自己的方式。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "外出娱乐",
+        "description": "先看场所、消费规则与安全。",
+        "tips": [
+          "tip-22-1",
+          "tip-22-2",
+          "tip-22-3",
+          "tip-22-4",
+          "tip-22-5"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "日常减压",
+        "description": "选 1 项容易开始的活动。",
+        "tips": [
+          "tip-22-6",
+          "tip-22-7",
+          "tip-22-8",
+          "tip-22-9",
+          "tip-22-10"
+        ]
+      }
+    ]
+  },
+  "reference-book-23": {
+    "hook": "想学点东西改变生活？先确认出路，再决定课程和投入。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "升学还是工作",
+        "description": "",
+        "tips": [
+          "tip-23-1",
+          "tip-23-2",
+          "tip-23-3",
+          "tip-23-4",
+          "tip-23-5",
+          "tip-23-6"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "挑选技能与课程",
+        "description": "",
+        "tips": [
+          "tip-23-7",
+          "tip-23-8",
+          "tip-23-9",
+          "tip-23-10",
+          "tip-23-11",
+          "tip-23-12",
+          "tip-23-13"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "学习与练习方法",
+        "description": "",
+        "tips": [
+          "tip-23-14",
+          "tip-23-15",
+          "tip-23-16",
+          "tip-23-17",
+          "tip-23-18",
+          "tip-23-19"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "职称与申报",
+        "description": "",
+        "tips": [
+          "tip-23-20",
+          "tip-23-21",
+          "tip-23-22",
+          "tip-23-23"
+        ]
+      }
+    ]
+  },
+  "reference-book-24": {
+    "hook": "挂号、报销、维权怎么走？按就医过程找下一步。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "选医院与结算",
+        "description": "按就医路径准备材料。",
+        "tips": [
+          "tip-24-1",
+          "tip-24-2",
+          "tip-24-3",
+          "tip-24-4"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "急诊与病历",
+        "description": "紧急情况先就医，记录及时留存。",
+        "tips": [
+          "tip-24-5",
+          "tip-24-7",
+          "tip-24-8"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "争议与评定",
+        "description": "分清渠道，核对所需手续。",
+        "tips": [
+          "tip-24-6",
+          "tip-24-9",
+          "tip-24-10",
+          "tip-24-11"
+        ]
+      }
+    ]
+  },
+  "reference-book-25": {
+    "hook": "亲人离世后，先找可信的人一起办手续，再慢慢处理后续。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "先办眼前手续",
+        "description": "确认死亡、接运与必要证明。",
+        "tips": [
+          "tip-25-1",
+          "tip-25-2",
+          "tip-25-3",
+          "tip-25-4"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "费用与服务",
+        "description": "询价、核验资质，再确认项目。",
+        "tips": [
+          "tip-25-6",
+          "tip-25-7",
+          "tip-25-8"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "处理后续账户",
+        "description": "户籍、待遇与数字账户逐项整理。",
+        "tips": [
+          "tip-25-5",
+          "tip-25-9",
+          "tip-25-10"
+        ]
+      }
+    ]
+  },
+  "reference-book-26": {
+    "hook": "网站上线前，按业务检查资质、交易、内容和用户保护。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "开站与业务资质",
+        "description": "按实际业务核对许可与备案。",
+        "tips": [
+          "tip-26-1",
+          "tip-26-2",
+          "tip-26-3",
+          "tip-26-4",
+          "tip-26-11"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "交易与内容责任",
+        "description": "明确商家、内容和知识产权流程。",
+        "tips": [
+          "tip-26-5",
+          "tip-26-6",
+          "tip-26-9"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "用户与数据保护",
+        "description": "实名、未成年人和数据跨境分别检查。",
+        "tips": [
+          "tip-26-7",
+          "tip-26-8",
+          "tip-26-10"
+        ]
+      }
+    ]
+  },
+  "reference-book-27": {
+    "hook": "从怀孕到产后，把每个阶段要核对的事情放在一起。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "备孕与孕期检查",
+        "description": "把检查和医生建议安排好。",
+        "tips": [
+          "tip-27-1",
+          "tip-27-2",
+          "tip-27-3",
+          "tip-27-4",
+          "tip-27-5",
+          "tip-27-6"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "急症与分娩",
+        "description": "识别信号，提前了解分娩安排。",
+        "tips": [
+          "tip-27-7",
+          "tip-27-8",
+          "tip-27-9",
+          "tip-27-10"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "证件与保障",
+        "description": "把待遇、证明和登记放在一起办。",
+        "tips": [
+          "tip-27-11",
+          "tip-27-12",
+          "tip-27-14",
+          "tip-27-15"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "新生儿与产后",
+        "description": "按阶段核对筛查与复查。",
+        "tips": [
+          "tip-27-13",
+          "tip-27-16"
+        ]
+      }
+    ]
+  },
+  "reference-book-28": {
+    "hook": "想改变外形，先确认健康与资质，再比较代价和预期。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "先照顾身体",
+        "description": "避免极端手段，确认就医渠道。",
+        "tips": [
+          "tip-28-1",
+          "tip-28-6",
+          "tip-28-7",
+          "tip-28-8"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "项目与产品风险",
+        "description": "资质、成分和真实效果都要核对。",
+        "tips": [
+          "tip-28-2",
+          "tip-28-3",
+          "tip-28-4",
+          "tip-28-5"
+        ]
+      }
+    ]
+  },
+  "reference-book-29": {
+    "hook": "重大变故后不用一次解决全部问题。先让今天能过下去。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "先稳住今天",
+        "description": "有人陪、能睡能吃，再慢慢恢复节奏。",
+        "tips": [
+          "tip-29-1",
+          "tip-29-2",
+          "tip-29-3",
+          "tip-29-5",
+          "tip-29-6",
+          "tip-29-12"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "悲伤与支持",
+        "description": "给自己和孩子留出适合的支持方式。",
+        "tips": [
+          "tip-29-7",
+          "tip-29-8",
+          "tip-29-9"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "危机与现实压力",
+        "description": "遇到安全风险及时求助，也处理眼前保障。",
+        "tips": [
+          "tip-29-4",
+          "tip-29-10",
+          "tip-29-11",
+          "tip-29-13"
+        ]
+      }
+    ]
+  },
+  "reference-book-30": {
+    "hook": "陪孩子上学，成绩之外也要看身体、情绪和关系。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "身体与日常作息",
+        "description": "眼睛、牙齿、睡眠和户外活动一起看。",
+        "tips": [
+          "tip-30-1",
+          "tip-30-2",
+          "tip-30-4",
+          "tip-30-5",
+          "tip-30-6",
+          "tip-30-7",
+          "tip-30-9",
+          "tip-30-10",
+          "tip-30-12",
+          "tip-30-13"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "学校与情绪",
+        "description": "关注欺凌、心理信号和休学支持。",
+        "tips": [
+          "tip-30-3",
+          "tip-30-8",
+          "tip-30-11"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "家庭沟通与网络",
+        "description": "尊重孩子，也把边界说清楚。",
+        "tips": [
+          "tip-30-14",
+          "tip-30-15",
+          "tip-30-16",
+          "tip-30-17",
+          "tip-30-18"
+        ]
+      }
+    ]
+  },
+  "reference-book-31": {
+    "hook": "成年后的路不止 1 条。先了解门槛、保障和退出条件。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "先比较出路",
+        "description": "把门槛、收益和退出方式列出来。",
+        "tips": [
+          "tip-31-1",
+          "tip-31-10",
+          "tip-31-13",
+          "tip-31-16"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "服役与退役",
+        "description": "按身份和阶段核对手续及待遇。",
+        "tips": [
+          "tip-31-2",
+          "tip-31-3",
+          "tip-31-4",
+          "tip-31-5",
+          "tip-31-6"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "岗位与就业保障",
+        "description": "选择岗位时，也要看保障规则。",
+        "tips": [
+          "tip-31-7",
+          "tip-31-8",
+          "tip-31-9",
+          "tip-31-11",
+          "tip-31-12"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "境外工作",
+        "description": "核实用工渠道与税务责任。",
+        "tips": [
+          "tip-31-14",
+          "tip-31-15"
+        ]
+      }
+    ]
+  },
+  "reference-book-32": {
+    "hook": "留学先核对学校和身份，再把生活、医疗与回国手续排好。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "学校与身份",
+        "description": "确认认可情况，跟上身份和地址变更。",
+        "tips": [
+          "tip-32-1",
+          "tip-32-2",
+          "tip-32-3",
+          "tip-32-4",
+          "tip-32-5"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "生活与医疗",
+        "description": "按目的地核对提醒和健康保障。",
+        "tips": [
+          "tip-32-6",
+          "tip-32-7",
+          "tip-32-8"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "毕业与回国",
+        "description": "及时留存学历和审核材料。",
+        "tips": [
+          "tip-32-9",
+          "tip-32-10"
+        ]
+      }
+    ]
+  },
+  "reference-book-33": {
+    "hook": "身体有变化，生活仍能重新安排。先找支持，再谈工作和出行。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "身体与康复",
+        "description": "",
+        "tips": [
+          "tip-33-1",
+          "tip-33-5",
+          "tip-33-6",
+          "tip-33-16",
+          "tip-33-17"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "待遇与补贴",
+        "description": "",
+        "tips": [
+          "tip-33-7",
+          "tip-33-8",
+          "tip-33-9",
+          "tip-33-11"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "工作与维权",
+        "description": "",
+        "tips": [
+          "tip-33-10",
+          "tip-33-20"
+        ]
+      },
+      {
+        "id": "group-4",
+        "title": "上学与出行",
+        "description": "",
+        "tips": [
+          "tip-33-12",
+          "tip-33-13",
+          "tip-33-14",
+          "tip-33-15"
+        ]
+      },
+      {
+        "id": "group-5",
+        "title": "心理与照护者",
+        "description": "",
+        "tips": [
+          "tip-33-2",
+          "tip-33-4"
+        ]
+      },
+      {
+        "id": "group-6",
+        "title": "精神障碍与监护",
+        "description": "",
+        "tips": [
+          "tip-33-3",
+          "tip-33-18",
+          "tip-33-19"
+        ]
+      }
+    ]
+  },
+  "reference-book-34": {
+    "hook": "用药前先看成分、适用人群与相互作用；拿不准就问医生或药师。",
+    "groups": [
+      {
+        "id": "group-1",
+        "title": "看清成分与用法",
+        "description": "避免重复服药，核对常见药物条件。",
+        "tips": [
+          "tip-34-1",
+          "tip-34-3",
+          "tip-34-6",
+          "tip-34-7",
+          "tip-34-8",
+          "tip-34-9"
+        ]
+      },
+      {
+        "id": "group-2",
+        "title": "儿童与孕期",
+        "description": "不同人群，不能照搬成人用药。",
+        "tips": [
+          "tip-34-2",
+          "tip-34-4",
+          "tip-34-5"
+        ]
+      },
+      {
+        "id": "group-3",
+        "title": "存放与相互作用",
+        "description": "管理家中药物，服药时留意酒精等风险。",
+        "tips": [
+          "tip-34-10",
+          "tip-34-11"
+        ]
+      }
+    ]
+  }
+}
