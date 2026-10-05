@@ -11,6 +11,8 @@
 | `content/short-tips-01-12.json` | 第 1–12 章的一句话阅读映射 |
 | `content/short-tips-13-34.json` | 第 13–34 章的一句话阅读映射 |
 | `content/reading-groups.json` | 34 章的问题分组及稳定锚点 |
+| `content/plan-*.html` | 共同基础与 8 档行动计划正文 |
+| `src/plans.js` / `src/Plans.jsx` | 区间定义、3 组入口与阶段重点选择 |
 | `scripts/build-content.mjs` | 读取原文，组合短版、原文、目录和搜索数据 |
 | `src/generated/` | 构建生成的数据，禁止手工编辑 |
 | Vite + `scripts/prerender.jsx` | 编译资源，生成逐页 HTML、搜索索引和 sitemap |
@@ -31,6 +33,8 @@
 六个分类在 `src/data.js` 定义。旧分类 `career`、`learning`、`relationships`、`living`、`energy`、`thinking` 映射到现有分类；`public/_redirects` 为旧分类 URL 保留 301 跳转。
 
 文章 slug 与条目 ID 保持稳定。`prerender.jsx` 输出页面元数据、canonical、sitemap 和真实 404 页面。
+
+`/plans` 提供 3 组、8 档入口，选择后定位到重点区；计划正文仍使用 `/guide/plan-*`。计划的折叠说明及依据都可搜索。当前构建生成 76 个页面，搜索有 887 个条目；这些计数由验证输出确认，改动内容后需更新。
 
 ## 修改后的检查
 

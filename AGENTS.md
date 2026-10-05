@@ -22,6 +22,7 @@ npm run preview
 - 改目录、构建或搜索：读 [docs/architecture.md](docs/architecture.md)。
 - 改原文、标题或一句话要点：读 [docs/content.md](docs/content.md)。
 - 改界面或文案：读 [docs/design.md](docs/design.md)。
+- 改家庭净资产分级与行动计划：读 [docs/plans.md](docs/plans.md)。
 - 提交和发布：读 [docs/deployment.md](docs/deployment.md)。
 - 编辑 `docs/` 时，额外读取 [docs/AGENTS.md](docs/AGENTS.md)。
 
@@ -35,6 +36,7 @@ npm run preview
 - 不手工修改 `src/generated/` 或 `dist/`；通过构建重新生成。
 - 保持条目 ID、来源链接、作者署名、许可和已有 URL 可用。
 - 保留全站搜索、方案加权评分、收藏和本机记录。
+- 阶段计划以家庭净资产（含自住房，总资产减负债）为口径；保留明确金额区间、现金流检查和非官方标签说明。
 - 提交仅包含本阶段文件；每阶段均须可独立构建、验证与发布。
 - 不把凭据、账户 ID、本机路径或个人决策记录写入仓库。
 

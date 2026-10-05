@@ -8,7 +8,7 @@ import { categories } from '../src/data.js';
 const articles = JSON.parse(await readFile('src/generated/content.json', 'utf8'));
 const tips = JSON.parse(await readFile('src/generated/tips.json', 'utf8'));
 const template = await readFile('dist/index.html', 'utf8');
-const paths = ['/', '/guides', '/workbench', ...categories.map(item => `/guides/${item.id}`), ...articles.map(item => `/guide/${item.slug}`), '/404'];
+const paths = ['/', '/guides', '/plans', '/workbench', ...categories.map(item => `/guides/${item.id}`), ...articles.map(item => `/guide/${item.slug}`), '/404'];
 for (const path of paths) {
   const metadata = pageMetadata(path);
   const $ = load(template);

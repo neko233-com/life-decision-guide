@@ -5,6 +5,7 @@ import { load } from 'cheerio';
 import { categories, categoryAliases } from '../src/data.js';
 import { createSearchIndex, searchIndex } from '../src/search.js';
 import { createDraft, evaluateOptions, recordMarkdown, validDraft } from '../src/scoring.js';
+import { assetLevel, assetPlans, planHref } from '../src/plans.js';
 
 const normalize = value => value.replace(/\s+/g, ' ').trim();
 const readJson = async path => JSON.parse(await readFile(path, 'utf8'));
@@ -78,7 +79,7 @@ for (const file of (await readdir('content')).filter(file => file.endsWith('.htm
 assert.equal(originalCount, tips.length, 'All source suggestions must be retained');
 
 const index = createSearchIndex(searchData.articles, searchData.categories, searchData.tips);
-assert.equal(index.length, 3 + categories.length + articles.length + tips.length + articles.reduce((count, article) => count + (article.extraSections?.length || 0) + (article.groups?.length || 0), 0));
+assert.equal(index.length, 4 + categories.length + articles.length + tips.length + articles.reduce((count, article) => count + (article.extraSections?.length || 0) + (article.groups?.length || 0), 0));
 for (const article of articles) {
   for (const group of article.groups || []) assert.ok(searchIndex(index, group.title).some(result => result.href === `/guide/${article.slug}#${group.anchor}`), `Group not searchable: ${article.slug}#${group.anchor}`);
   for (const section of article.extraSections || []) {
@@ -116,8 +117,25 @@ assert.equal(evaluation.highest, null); assert.equal(evaluation.totalWeight, 0);
 assert.ok(evaluation.results.every(result => result.hundred === null && !result.complete));
 assert.equal(validDraft({ ...draft, options: [draft.options[0], draft.options[0]] }), false);
 assert.equal(validDraft(null), false);
+assert.equal(assetPlans.length, 8);
+assert.equal(articles.filter(article => article.kind === 'plan').length, 9);
+assert.equal(assetLevel(-1), null); assert.equal(assetLevel(9999), null);
+assert.equal(assetLevel(10000), 'A5'); assert.equal(assetLevel(99999), 'A5');
+assert.equal(assetLevel(100000), 'A6'); assert.equal(assetLevel(1500000), 'A7');
+assert.equal(assetLevel(10000000), 'A8'); assert.equal(assetLevel(100000000000), 'A12');
+assert.equal(assetLevel(1000000000000), null); assert.equal(assetLevel(NaN), null);
+for (const plan of assetPlans) {
+  assert.equal(assetLevel(plan.lower), plan.level);
+  assert.equal(assetLevel(plan.upper - 1), plan.level);
+  const guide = bySlug.get(planHref(plan.level).slice(7));
+  assert.ok(guide && guide.kind === 'plan', `Missing plan ${plan.level}`);
+  const rendered = load(guide.html);
+  assert.ok(rendered('.plan-range').text().includes(plan.range), `Inconsistent asset range ${plan.level}`);
+  for (const id of ['focus', 'next-30', 'next-90', 'check', 'liquidity', 'housing', 'career', 'health', 'family', 'long-term']) assert.equal(rendered(`#${id}`).length, 1, `Incomplete plan ${plan.level}: ${id}`);
+  assert.ok(searchIndex(index, plan.level).some(result => result.href === planHref(plan.level)), `Plan not searchable ${plan.level}`);
+}
 
-const routes = ['/', '/guides', '/workbench', ...categories.map(category => `/guides/${category.id}`), ...articles.map(article => `/guide/${article.slug}`), '/404'];
+const routes = ['/', '/guides', '/plans', '/workbench', ...categories.map(category => `/guides/${category.id}`), ...articles.map(article => `/guide/${article.slug}`), '/404'];
 const pages = new Map();
 for (const route of routes) {
   const html = await readFile(route === '/' ? 'dist/index.html' : `dist${route}.html`, 'utf8');

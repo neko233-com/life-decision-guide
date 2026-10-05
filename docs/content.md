@@ -1,6 +1,6 @@
 # 内容维护
 
-内容共 56 篇：44 篇参考内容（34 章、658 条建议、9 篇补充文档、1 篇阅读帮助）和 12 篇原创决策指南。精简阅读层，完整原文继续保留。
+内容共 65 篇：44 篇参考内容（34 章、658 条建议、9 篇补充文档、1 篇阅读帮助）、12 篇原创决策指南和 9 篇行动计划。精简阅读层，完整原文继续保留。
 
 ## 编辑入口
 
@@ -11,6 +11,7 @@
 | 第 1–12 章建议短版 | `content/short-tips-01-12.json` |
 | 第 13–34 章建议短版 | `content/short-tips-13-34.json` |
 | 章节问题分组、顺序与导读 | `content/reading-groups.json` |
+| 资产阶段计划正文 | `content/plan-*.html`，口径见 [行动计划](plans.md) |
 | 重新同步参考原文 | `scripts/import-reference.mjs` 与固定版本上游快照 |
 
 短版键使用 `{slug}#{tip-id}`，例如 `reference-book-01#tip-1-1`，值包含 `title` 和 `summary`。改短版时不直接删改参考 HTML。

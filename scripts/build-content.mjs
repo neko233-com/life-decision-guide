@@ -116,7 +116,7 @@ for (const file of (await readdir('content')).filter(file => file.endsWith('.htm
   const summaryText = summary.text().replace(/\s+/g, ' ').trim();
   const tipCount = article.find('.reference-tip').length;
   const detailText = tipCount ? introductionText : article.find('.full-guide-body').text().replace(/\s+/g, ' ').trim();
-  const extraSections = article.find('.reference-extra').toArray().map(section => ({ anchor: $(section).find('h2').attr('id'), title: $(section).find('h2').text(), text: $(section).text().replace(/\s+/g, ' ').trim() }));
+  const extraSections = article.find(article.attr('data-kind') === 'plan' ? '.reference-extra, .source-info' : '.reference-extra').toArray().map(section => ({ anchor: $(section).attr('id') || $(section).find('h2').attr('id'), title: $(section).find('h2').text() || $(section).find('summary').first().text(), text: $(section).text().replace(/\s+/g, ' ').trim() }));
   const toc = article.find('h2').toArray().filter(heading => !$(heading).closest('.full-guide, .source-info, .tip-source').length).map(heading => ({ id: $(heading).attr('id'), title: $(heading).text() }));
   if (article.find('.full-guide').length) toc.push({ id: 'full-guide', title: '完整内容' });
   articles.push({ slug, title, originalTitle, category, kind: article.attr('data-kind') || 'original', tipCount, groups, source: article.attr('data-source-url') ? { url: article.attr('data-source-url'), path: article.attr('data-source-path') } : null, order: Number(article.attr('data-order')), excerpt: article.find('.lead').text(), html: article.html(), text, summaryText, detailText, extraSections, toc, minutes: Math.max(1, Math.ceil(summaryText.replace(/\s/g, '').length / 260)) });
