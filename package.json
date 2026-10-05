@@ -7,6 +7,7 @@
     "dev": "node scripts/build-content.mjs && vite --host 127.0.0.1",
     "build": "node scripts/build-content.mjs && vite build && tsx scripts/prerender.jsx",
     "preview": "vite preview --host 127.0.0.1",
+    "verify": "node scripts/verify.mjs",
     "import:reference": "node scripts/import-reference.mjs",
     "deploy": "npm run build && wrangler pages deploy dist --project-name life-decision-guide --branch main"
   },

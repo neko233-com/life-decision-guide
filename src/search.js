@@ -1,5 +1,5 @@
 const publicPages = [
-  { href: '/', title: '指南首页', text: '人生决策指南。想清楚，再决定。一个问题，三个步骤。', icon: 'Compass' },
+  { href: '/', title: '指南首页', text: '人生决策指南。把生活，理清楚。读一句要点，查完整依据。', icon: 'Compass' },
   { href: '/guides', title: '阅读指南', text: '按主题浏览全部指南，筛选文章，查看收藏。', icon: 'BookOpen' },
   { href: '/workbench', title: '方案对比', text: '决策工作台。写清问题、目标和底线。比较方案，设置标准和权重，给选项打分与评分。先试一步，回看结果，导出 Markdown 记录。', icon: 'FileText' },
 ];
@@ -18,16 +18,16 @@ export function createSearchIndex(articles, categories, tips = []) {
     ...articles.map(article => {
       const chapter = article.kind === 'reference' && article.tipCount > 0;
       const text = article.text ?? [article.summaryText, article.detailText].filter(Boolean).join(' ');
-      return { href: `/guide/${article.slug}`, title: article.title, text: chapter ? article.summaryText ?? article.excerpt ?? '' : text, summaryText: article.summaryText, detailText: chapter ? '' : article.detailText, excerpt: article.excerpt, category: categoryNames[article.category] || '', kind: chapter ? 'chapter' : 'article', label: chapter ? '章节' : '指南', icon: 'BookOpen' };
+      return { href: `/guide/${article.slug}`, title: article.title, originalTitle: article.originalTitle, text: chapter ? [article.summaryText, article.detailText].filter(Boolean).join(' ') : text, summaryText: article.summaryText, detailText: article.detailText, detailAnchor: chapter ? 'reading-info' : 'full-guide', excerpt: article.excerpt, category: categoryNames[article.category] || '', kind: chapter ? 'chapter' : 'article', label: chapter ? '章节' : '指南', icon: 'BookOpen' };
     }),
-    ...tips.map(tip => ({ id: tip.id, href: tip.href, title: tip.title || tip.plain, plain: tip.plain, text: tip.text || [['说人话', tip.plain], ['成本', tip.cost], ['收益', tip.benefit], ['证据等级', tip.evidence], ['来源', tip.sources], ['备注', tip.notes]].filter(([, value]) => value).map(([label, value]) => `${label}：${value}`).join(' '), cost: tip.cost, benefit: tip.benefit, evidence: tip.evidence, sources: tip.sources, notes: tip.notes, chapterSlug: tip.chapterSlug, chapterTitle: tip.chapterTitle, category: categoryNames[tip.category] || tip.category || '', kind: 'tip', label: '建议', icon: 'List' })),
+    ...tips.map(tip => ({ id: tip.id, href: tip.href, title: tip.title || tip.plain, originalTitle: tip.originalTitle, summaryText: tip.summary, plain: tip.plain, text: tip.text || [tip.originalTitle, tip.summary, ...[['说人话', tip.plain], ['成本', tip.cost], ['收益', tip.benefit], ['证据等级', tip.evidence], ['来源', tip.sources], ['备注', tip.notes]].filter(([, value]) => value).map(([label, value]) => `${label}：${value}`)].filter(Boolean).join(' '), cost: tip.cost, benefit: tip.benefit, evidence: tip.evidence, sources: tip.sources, notes: tip.notes, chapterSlug: tip.chapterSlug, chapterTitle: tip.chapterTitle, category: categoryNames[tip.category] || tip.category || '', kind: 'tip', label: '建议', icon: 'List' })),
   ].map((entry, order) => {
     const normalizedTitle = normalize(entry.title);
     const normalizedText = normalize(entry.text);
     const normalizedCategory = normalize(entry.category);
     const normalizedChapter = normalize(entry.chapterTitle);
     const normalizedFields = normalize([entry.plain, entry.cost, entry.benefit, entry.evidence, entry.sources, entry.notes].filter(Boolean).join(' '));
-    return { ...entry, id: entry.id || entry.href, baseHref: entry.href, order, normalizedTitle, normalizedText, normalizedSummary: normalize(entry.summaryText ?? entry.text), normalizedDetail: normalize(entry.detailText), normalizedCategory, normalizedChapter, normalizedPlain: normalize(entry.plain), searchable: `${normalizedTitle} ${normalizedCategory} ${normalizedChapter} ${normalizedText} ${normalizedFields}` };
+    return { ...entry, id: entry.id || entry.href, baseHref: entry.href, order, normalizedTitle, normalizedText, normalizedSummary: normalize(entry.summaryText ?? entry.text), normalizedDetail: normalize(entry.detailText), normalizedCategory, normalizedChapter, normalizedPlain: normalize(entry.plain), searchable: `${normalizedTitle} ${normalize(entry.originalTitle)} ${normalizedCategory} ${normalizedChapter} ${normalizedText} ${normalizedFields}` };
   });
 }
 
@@ -48,9 +48,9 @@ export function searchIndex(index, query) {
       if (entry.normalizedText.includes(term)) score += 2;
     }
     const summary = `${entry.normalizedTitle} ${entry.normalizedCategory} ${entry.normalizedSummary}`;
-    const hasSummary = entry.kind === 'article' && typeof entry.summaryText === 'string';
+    const hasSummary = (entry.kind === 'article' || entry.kind === 'chapter') && typeof entry.summaryText === 'string';
     const detailMatch = hasSummary && terms.some(term => !summary.includes(term) && entry.normalizedDetail.includes(term));
-    return [{ ...entry, score, href: detailMatch ? `${entry.baseHref}#full-guide` : entry.baseHref, matchType: detailMatch ? 'detail' : 'summary', matchLabel: hasSummary ? detailMatch ? '完整说明' : '简版' : undefined }];
+    return [{ ...entry, score, href: detailMatch ? `${entry.baseHref}#${entry.detailAnchor || 'full-guide'}` : entry.baseHref, matchType: detailMatch ? 'detail' : 'summary', matchLabel: hasSummary ? detailMatch ? '完整内容' : '要点' : undefined }];
   }).sort((a, b) => b.score - a.score || a.order - b.order);
 }
 
@@ -59,7 +59,7 @@ export function resultSnippet(entry, terms, maxLength = 65) {
   let source = entry.matchType === 'detail' ? entry.detailText : entry.summaryText ?? entry.text;
   if (entry.kind === 'tip') {
     const extraTerms = terms.filter(term => !entry.normalizedPlain.includes(term) && entry.normalizedText.includes(term));
-    source = extraTerms.length ? entry.text : entry.plain || entry.text;
+    source = entry.summaryText && terms.every(term => entry.normalizedSummary.includes(term) || entry.normalizedTitle.includes(term)) ? entry.summaryText : extraTerms.length ? entry.text : entry.plain || entry.text;
     if (extraTerms.length) snippetTerms = extraTerms;
   }
   const text = String(source || entry.text || entry.excerpt || '').replace(/\s+/g, ' ').trim();

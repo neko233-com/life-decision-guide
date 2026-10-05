@@ -2,6 +2,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import App, { pageMetadata } from './App.jsx';
 import './styles.css';
 import './search.css';
+import './apple.css';
 
 const path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const root = document.getElementById('root');
